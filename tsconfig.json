@@ -1,3 +1,41 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {},
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "target": "ES2019",
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "lint": {
+          "validProperties": [
+            "shadow-color",
+            "shadow-opacity",
+            "shadow-offset",
+            "shadow-radius",
+            "padding-horizontal",
+            "padding-vertical",
+            "margin-vertical",
+            "margin-horizontal",
+            "tint-color",
+            "aspect-ratio",
+            "elevation"
+          ]
+        }
+      }
+    ]
+  },
+  "exclude": []
 }
