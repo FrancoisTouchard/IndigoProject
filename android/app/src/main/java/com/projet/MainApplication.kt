@@ -11,8 +11,6 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
-import android.os.Bundle
-import com.zoontek.rnbootsplash.RNBootSplash
 
 class MainApplication : Application(), ReactApplication {
 
@@ -36,7 +34,6 @@ class MainApplication : Application(), ReactApplication {
     get() = getDefaultReactHost(this.applicationContext, reactNativeHost)
 
   override fun onCreate() {
-    RNBootSplash.init(this, R.style.BootTheme)
     super.onCreate()
     SoLoader.init(this, false)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
