@@ -1,7 +1,8 @@
 import React from 'react';
-import {memo} from 'react';
-import {Text, View} from 'react-native';
-import {useSplashScreen} from './useSplashScreen';
+import { memo } from 'react';
+import { Text, View } from 'react-native';
+
+import { useSplashScreen } from './useSplashScreen';
 
 const SplashScreenComponent = () => {
   useSplashScreen();
