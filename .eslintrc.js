@@ -3,7 +3,6 @@ module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   plugins: [
     'react-native-a11y',
-    'eslint-plugin-local-rules',
     'jest',
     'simple-import-sort',
     'react-hooks',
@@ -38,8 +37,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-shadow': ['error'],
     'no-console': ['error', { allow: ['warn'] }],
-    'local-rules/no-turbo-console-log': ['error'],
-    'local-rules/no-x-www-form-urlencoded': ['error'],
     'jest/no-focused-tests': 'error',
     'jest/no-disabled-tests': 'warn',
     'react-native-a11y/has-accessibility-hint': 'off',
@@ -88,12 +85,6 @@ module.exports = {
       files: ['**/*.test.ts', '**/*.test.tsx'],
       env: {
         jest: true,
-      },
-    },
-    {
-      files: ['src/assets/svg/**/*.tsx'],
-      rules: {
-        'local-rules/force-memo-rn-svg': ['error'],
       },
     },
   ],

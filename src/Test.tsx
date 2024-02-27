@@ -1,6 +1,5 @@
-import React, {memo} from 'react';
-import {useMemo} from 'react';
-import {Text, View} from 'react-native';
+import React, { memo } from 'react';
+import { Text, View } from 'react-native';
 
 const PreMatchComponent = (): JSX.Element => {
   return (
