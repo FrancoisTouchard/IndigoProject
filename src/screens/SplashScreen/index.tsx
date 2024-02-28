@@ -1,17 +1,14 @@
-import React from 'react';
-import { memo } from 'react';
-import { Text, View } from 'react-native';
+import React, { memo } from 'react';
 
-import { useSplashScreen } from './useSplashScreen';
+import { usePreloadImages } from '../GameDisplay/AnimationOpening/usePreloadImages';
+import { SplashScreenComponentProps } from './types';
 
-const SplashScreenComponent = () => {
-  useSplashScreen();
+const SplashScreenComponent = (props: SplashScreenComponentProps) => {
+  const { switchToOpeningScreen } = props;
 
-  return (
-    <View>
-      <Text>Hello yeah ça biche</Text>
-    </View>
-  );
+  usePreloadImages(switchToOpeningScreen);
+
+  return <></>;
 };
 
 export const SplashScreen = memo(SplashScreenComponent);

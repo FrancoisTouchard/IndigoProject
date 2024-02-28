@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx .",
     "start": "react-native start",
     "test": "jest",
     "lintFix": "eslint --fix --ext .ts,.tsx ."
@@ -13,7 +13,8 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.73.3",
-    "react-native-bootsplash": "^5.4.1"
+    "react-native-bootsplash": "^5.4.1",
+    "react-native-fast-image": "^8.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
