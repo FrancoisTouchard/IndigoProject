@@ -1,8 +1,9 @@
-import { turquoise } from 'assets/AnimationOpening/stylesColorsCode';
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-const GameControls = () => {
+import { turquoise } from '../../../assets/AnimationOpening/stylesColorsCode';
+
+const GameControlsComponent = () => {
   return <View style={styles.controlsContainer} />;
 };
 
@@ -14,4 +15,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameControls;
+export const GameControls = memo(GameControlsComponent);

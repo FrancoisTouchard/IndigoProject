@@ -1,18 +1,18 @@
-import { white } from 'assets/AnimationOpening/stylesColorsCode';
-import React from 'react';
+import React, { memo } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import OpeningScreen from '../OpeningScreen';
-import { SplashScreenComponent } from '../SplashScreen';
+import { white } from '../../../assets/AnimationOpening/stylesColorsCode';
+import { OpeningScreen } from '../OpeningScreen';
+import { SplashScreen } from '../SplashScreen';
 import { useScreenManager } from './useScreenManager';
 
-function ScreenManager(): React.JSX.Element {
+function ScreenManagerComponent(): React.JSX.Element {
   const { currentScreen, switchToOpeningScreen } = useScreenManager();
 
   return (
     <SafeAreaView style={styles.appContainer}>
       {currentScreen === 'Bootsplash' && (
-        <SplashScreenComponent switchToOpeningScreen={switchToOpeningScreen} />
+        <SplashScreen switchToOpeningScreen={switchToOpeningScreen} />
       )}
       {currentScreen === 'OpeningScreen' && <OpeningScreen />}
     </SafeAreaView>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenManager;
+export const ScreenManager = memo(ScreenManagerComponent);

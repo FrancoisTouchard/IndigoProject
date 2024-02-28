@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import GameControls from '../GameControls/index';
-import GameDisplay from '../GameDisplay/index';
+import { GameControls } from '../GameControls/index';
+import { GameDisplay } from '../GameDisplay/index';
 
-const OpeningScreen = () => {
+const OpeningScreenComponent = () => {
   return (
     <View style={styles.gameAndControlsContainer}>
       <GameDisplay />
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OpeningScreen;
+export const OpeningScreen = memo(OpeningScreenComponent);

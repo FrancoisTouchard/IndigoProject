@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const AnimationOpening = () => {
+const AnimationOpeningComponent = () => {
   const opacityFirstImage = useRef(new Animated.Value(0)).current;
   const opacitySecondImage = useRef(new Animated.Value(0)).current;
   const opacityThirdImage = useRef(new Animated.Value(0)).current;
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnimationOpening;
+export const AnimationOpening = memo(AnimationOpeningComponent);

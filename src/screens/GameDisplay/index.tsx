@@ -1,10 +1,10 @@
-import { black } from 'assets/AnimationOpening/stylesColorsCode';
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import AnimationOpening from './AnimationOpening/index';
+import { black } from '../../../assets/AnimationOpening/stylesColorsCode';
+import { AnimationOpening } from './AnimationOpening/index';
 
-const GameDisplay = () => {
+const GameDisplayComponent = () => {
   return (
     <View style={styles.gameDisplayContainer}>
       <AnimationOpening />
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameDisplay;
+export const GameDisplay = memo(GameDisplayComponent);
