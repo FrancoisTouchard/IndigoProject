@@ -10,7 +10,7 @@ const GameControlsComponent = () => {
 const styles = StyleSheet.create({
   controlsContainer: {
     width: '100%',
-    height: '45%',
+    height: '55%',
     backgroundColor: turquoise,
   },
 });
