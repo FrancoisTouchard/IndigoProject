@@ -42,7 +42,7 @@ const AnimationOpeningComponent = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <>
       <Animated.View style={[styles.image, { opacity: opacityFirstImage }]}>
         <FastImage
           style={styles.image}
@@ -64,16 +64,11 @@ const AnimationOpeningComponent = () => {
           resizeMode={FastImage.resizeMode.cover}
         />
       </Animated.View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    width: 300,
-    height: 300,
-  },
   image: {
     position: 'absolute',
     width: '100%',
