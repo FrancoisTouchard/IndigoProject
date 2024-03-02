@@ -15,7 +15,7 @@ const GameDisplayComponent = () => {
 const styles = StyleSheet.create({
   gameDisplayContainer: {
     width: '100%',
-    height: '55%',
+    height: '45%',
     backgroundColor: black,
     alignItems: 'center',
     justifyContent: 'center',
