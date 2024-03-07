@@ -40,6 +40,5 @@ export const onPanResponderGrantOrMove = (
   }
   if (direction) {
     setIsPressed(direction);
-    console.log(direction);
   }
 };
