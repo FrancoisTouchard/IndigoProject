@@ -1,3 +1,5 @@
+export type ArrowType = 'up' | 'down' | 'left' | 'right';
+
 export interface DirectionalArrowProps {
-  arrowType: 'top' | 'bottom' | 'left' | 'right';
+  arrowType: ArrowType;
 }
