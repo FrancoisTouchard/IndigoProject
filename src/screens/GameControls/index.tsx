@@ -11,8 +11,10 @@ const GameControlsComponent = () => {
     <View style={styles.controlsContainer}>
       <View style={styles.primaryControlsContainer}>
         <DirectionalCross />
-        <PrimaryButton buttonType={'A'} />
-        <PrimaryButton buttonType={'B'} />
+        <View style={styles.abButtonsContainer}>
+          <PrimaryButton buttonType={'A'} />
+          <PrimaryButton buttonType={'B'} />
+        </View>
       </View>
       <View style={styles.secondaryControlsContainer}>
         <SecondaryButton buttonType={'Start'} />
@@ -31,7 +33,13 @@ const styles = StyleSheet.create({
     backgroundColor: turquoise,
   },
   primaryControlsContainer: {
-    width: '100%',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  abButtonsContainer: {
+    flex: 1,
     height: '50%',
     marginTop: '20%',
     marginBottom: '10%',

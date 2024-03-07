@@ -2,17 +2,20 @@ import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+import { ARROW_CONTAINER_DIMENSIONS } from '..';
 import { DirectionalArrowProps } from './types';
+
+export const ARROW_DIMENSIONS = 75;
 
 const DirectionalArrowComponent = ({ arrowType }: DirectionalArrowProps) => {
   let arrowStyle;
 
   switch (arrowType) {
-    case 'top':
-      arrowStyle = styles.topArrow;
+    case 'up':
+      arrowStyle = styles.upArrow;
       break;
-    case 'bottom':
-      arrowStyle = styles.bottomArrow;
+    case 'down':
+      arrowStyle = styles.downArrow;
       break;
     case 'left':
       arrowStyle = styles.leftArrow;
@@ -25,7 +28,7 @@ const DirectionalArrowComponent = ({ arrowType }: DirectionalArrowProps) => {
   }
 
   return (
-    <View style={[styles.arrowContainer, arrowStyle]}>
+    <View style={[styles.arrowContainer, arrowStyle]} pointerEvents="none">
       <FastImage
         style={styles.image}
         source={require('../../../../../assets/GameControls/arrow.png')}
@@ -40,30 +43,30 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '35%',
-    height: '35%',
+    width: ARROW_DIMENSIONS,
+    height: ARROW_DIMENSIONS,
   },
   image: {
     width: '100%',
     height: '100%',
   },
-  topArrow: {
-    top: '10%',
-    left: '33%',
+  upArrow: {
+    top: 0,
+    left: ARROW_CONTAINER_DIMENSIONS / 2 - ARROW_DIMENSIONS / 2,
     transform: [{ rotate: '180deg' }],
   },
-  bottomArrow: {
-    bottom: '10%',
-    left: '33%',
+  downArrow: {
+    bottom: 0,
+    left: ARROW_CONTAINER_DIMENSIONS / 2 - ARROW_DIMENSIONS / 2,
   },
   leftArrow: {
-    top: '33%',
-    left: '10%',
+    left: 0,
+    top: ARROW_CONTAINER_DIMENSIONS / 2 - ARROW_DIMENSIONS / 2,
     transform: [{ rotate: '90deg' }],
   },
   rightArrow: {
-    top: '33%',
-    right: '10%',
+    right: 0,
+    top: ARROW_CONTAINER_DIMENSIONS / 2 - ARROW_DIMENSIONS / 2,
     transform: [{ rotate: '-90deg' }],
   },
 });
