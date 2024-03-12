@@ -7,21 +7,33 @@ import { DirectionalArrowProps } from './types';
 
 export const ARROW_DIMENSIONS = 75;
 
-const DirectionalArrowComponent = ({ arrowType }: DirectionalArrowProps) => {
+const DirectionalArrowComponent = ({
+  arrowType,
+  isPressed,
+}: DirectionalArrowProps) => {
   let arrowStyle;
 
   switch (arrowType) {
     case 'up':
-      arrowStyle = styles.upArrow;
+      arrowStyle = [styles.upArrow, { opacity: isPressed === 'up' ? 0.5 : 1 }];
       break;
     case 'down':
-      arrowStyle = styles.downArrow;
+      arrowStyle = [
+        styles.downArrow,
+        { opacity: isPressed === 'down' ? 0.5 : 1 },
+      ];
       break;
     case 'left':
-      arrowStyle = styles.leftArrow;
+      arrowStyle = [
+        styles.leftArrow,
+        { opacity: isPressed === 'left' ? 0.5 : 1 },
+      ];
       break;
     case 'right':
-      arrowStyle = styles.rightArrow;
+      arrowStyle = [
+        styles.rightArrow,
+        { opacity: isPressed === 'right' ? 0.5 : 1 },
+      ];
       break;
     default:
       break;

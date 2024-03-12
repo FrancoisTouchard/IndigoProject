@@ -8,14 +8,14 @@ export const ARROW_CONTAINER_DIMENSIONS = 150;
 export const ARROW_CONTAINER_OFFSET_LEFT = 25;
 
 const DirectionalCrossComponent = () => {
-  const { panResponder } = useDirectionalCross();
+  const { panResponder, isPressed } = useDirectionalCross();
 
   return (
     <View style={styles.crossContainer} {...panResponder.panHandlers}>
-      <DirectionalArrow arrowType={'up'} />
-      <DirectionalArrow arrowType={'down'} />
-      <DirectionalArrow arrowType={'right'} />
-      <DirectionalArrow arrowType={'left'} />
+      <DirectionalArrow arrowType={'up'} isPressed={isPressed} />
+      <DirectionalArrow arrowType={'down'} isPressed={isPressed} />
+      <DirectionalArrow arrowType={'right'} isPressed={isPressed} />
+      <DirectionalArrow arrowType={'left'} isPressed={isPressed} />
     </View>
   );
 };
