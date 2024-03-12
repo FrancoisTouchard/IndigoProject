@@ -42,38 +42,33 @@ const AnimationOpeningComponent = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <>
       <Animated.View style={[styles.image, { opacity: opacityFirstImage }]}>
         <FastImage
           style={styles.image}
           source={require('../../../../assets/AnimationOpening/titre.png')}
-          resizeMode={FastImage.resizeMode.contain}
+          resizeMode={FastImage.resizeMode.cover}
         />
       </Animated.View>
       <Animated.View style={[styles.image, { opacity: opacitySecondImage }]}>
         <FastImage
           style={styles.image}
           source={require('../../../../assets/AnimationOpening/gameFreakLogo1.png')}
-          resizeMode={FastImage.resizeMode.contain}
+          resizeMode={FastImage.resizeMode.cover}
         />
       </Animated.View>
       <Animated.View style={[styles.image, { opacity: opacityThirdImage }]}>
         <FastImage
           style={styles.image}
           source={require('../../../../assets/AnimationOpening/startingImage.png')}
-          resizeMode={FastImage.resizeMode.contain}
+          resizeMode={FastImage.resizeMode.cover}
         />
       </Animated.View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    width: 300,
-    height: 300,
-  },
   image: {
     position: 'absolute',
     width: '100%',
