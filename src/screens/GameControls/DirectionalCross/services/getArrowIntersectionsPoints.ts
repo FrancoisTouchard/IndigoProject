@@ -12,7 +12,7 @@ export const arrowIntersectionsPoints = {
     },
     Y: {
       first: 0,
-      last: ARROW_DIMENSIONS * 0.66,
+      last: ARROW_DIMENSIONS * 0.66, // évite d'overlap les zones cliquables
     },
   },
   Down: {

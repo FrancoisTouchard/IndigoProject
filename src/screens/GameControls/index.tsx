@@ -12,13 +12,13 @@ const GameControlsComponent = () => {
       <View style={styles.primaryControlsContainer}>
         <DirectionalCross />
         <View style={styles.abButtonsContainer}>
-          <PrimaryButton buttonType={'A'} />
           <PrimaryButton buttonType={'B'} />
+          <PrimaryButton buttonType={'A'} />
         </View>
       </View>
       <View style={styles.secondaryControlsContainer}>
-        <SecondaryButton buttonType={'Start'} />
         <SecondaryButton buttonType={'Select'} />
+        <SecondaryButton buttonType={'Start'} />
       </View>
     </View>
   );
