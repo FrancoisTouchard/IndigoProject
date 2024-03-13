@@ -7,8 +7,8 @@ import { AbButtonProps } from './types';
 const AbButtonComponent = ({ buttonType }: AbButtonProps) => {
   const imageSource =
     buttonType === 'A'
-      ? require('../../../../../assets/GameControls/buttonA.png')
-      : require('../../../../../assets/GameControls/buttonB.png');
+      ? require('../../../../../../../assets/GameControls/buttonA.png')
+      : require('../../../../../../../assets/GameControls/buttonB.png');
 
   return (
     <FastImage
