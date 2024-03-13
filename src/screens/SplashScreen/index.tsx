@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { usePreloadImages } from '../GameDisplay/AnimationOpening/usePreloadImages';
+import { usePreloadImages } from '../OpeningScreen/components/GameDisplay/AnimationOpening/usePreloadImages';
 import { SplashScreenComponentProps } from './types';
 
 const SplashScreenComponent = (props: SplashScreenComponentProps) => {
