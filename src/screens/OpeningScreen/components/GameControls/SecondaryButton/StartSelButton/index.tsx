@@ -2,12 +2,9 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-// import { useGameDisplay } from '../../../GameDisplay/useGameDisplay';
 import { StartSelButtonProps } from './types';
 
 const StartSelButtonComponent = ({ buttonType }: StartSelButtonProps) => {
-  // const { gameStateSetter } = useGameDisplay();
-
   const imageSource =
     buttonType === 'Start'
       ? require('../../../../../../../assets/GameControls/buttonStart.png')
@@ -19,7 +16,6 @@ const StartSelButtonComponent = ({ buttonType }: StartSelButtonProps) => {
       source={imageSource}
       resizeMode={FastImage.resizeMode.contain}
     />
-    // </TouchableOpacity>
   );
 };
 

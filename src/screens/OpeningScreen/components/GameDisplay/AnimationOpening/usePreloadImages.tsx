@@ -9,6 +9,7 @@ export const usePreloadImages = (redirectToNextScreen: () => void) => {
       require('../../../../../../assets/AnimationOpening/titre.png'),
       require('../../../../../../assets/AnimationOpening/gameFreakLogo1.png'),
       require('../../../../../../assets/AnimationOpening/startingImage.png'),
+      require('../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png'),
     ];
 
     const uris = images.map(image => {
