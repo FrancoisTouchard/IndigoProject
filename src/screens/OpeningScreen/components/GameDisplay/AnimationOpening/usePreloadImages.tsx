@@ -6,10 +6,14 @@ import FastImage from 'react-native-fast-image';
 export const usePreloadImages = (redirectToNextScreen: () => void) => {
   useEffect(() => {
     const images = [
+      // AnimationOpening
       require('../../../../../../assets/AnimationOpening/titre.png'),
       require('../../../../../../assets/AnimationOpening/gameFreakLogo1.png'),
       require('../../../../../../assets/AnimationOpening/startingImage.png'),
+      // Rooms backgrounds
       require('../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png'),
+      // Player
+      require('../../../../../../assets/Player/RedStandbyFace.png'),
     ];
 
     const uris = images.map(image => {
