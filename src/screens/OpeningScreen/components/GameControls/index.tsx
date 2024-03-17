@@ -1,22 +1,24 @@
 import React, { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { PanResponderInstance, StyleSheet, View } from 'react-native';
 
 import { turquoise } from '../../../../../assets/AnimationOpening/stylesColorsCode';
 import { DirectionalCross } from './DirectionalCross';
 import { PrimaryButton } from './PrimaryButton/index';
 import { SecondaryButton } from './SecondaryButton/index';
 
-interface GameControlComponentProps {
+export interface GameControlComponentProps {
   redirectToGameScreen: () => void;
+  panResponder: PanResponderInstance;
 }
 
 const GameControlsComponent = ({
   redirectToGameScreen,
+  panResponder,
 }: GameControlComponentProps) => {
   return (
     <View style={styles.controlsContainer}>
       <View style={styles.primaryControlsContainer}>
-        <DirectionalCross />
+        <DirectionalCross panResponder={panResponder} />
         <View style={styles.abButtonsContainer}>
           <PrimaryButton buttonType={'B'} />
           <PrimaryButton buttonType={'A'} />
