@@ -14,6 +14,15 @@ export const usePreloadImages = (redirectToNextScreen: () => void) => {
       require('../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png'),
       // Player
       require('../../../../../../assets/Player/RedStandbyFace.png'),
+      require('../../../../../../assets/Player/RedStandbyBack.png'),
+      require('../../../../../../assets/Player/RedStandbyLeft.png'),
+      require('../../../../../../assets/Player/RedStandbyRight.png'),
+      require('../../../../../../assets/Player/RedGoingLeft.png'),
+      require('../../../../../../assets/Player/RedGoingRight.png'),
+      require('../../../../../../assets/Player/RedGoingDown1.png'),
+      require('../../../../../../assets/Player/RedGoingDown2.png'),
+      require('../../../../../../assets/Player/RedGoingUp1.png'),
+      require('../../../../../../assets/Player/RedGoingUp2.png'),
     ];
 
     const uris = images.map(image => {
