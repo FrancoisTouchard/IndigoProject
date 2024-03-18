@@ -21,7 +21,15 @@ const gameDisplayHeight = tileSize * VERTICAL_TILE_COUNT;
 const GameDisplayComponent = ({ gameState }: GameDisplayComponentProps) => {
   return (
     <View style={styles.gameDisplayContainer}>
-      {gameState === 'AnimationOpening' ? <AnimationOpening /> : <GameScreen />}
+      {gameState === 'AnimationOpening' ? (
+        <AnimationOpening />
+      ) : (
+        <GameScreen
+          tileSize={tileSize}
+          windowWidth={windowWidth}
+          gameDisplayHeight={gameDisplayHeight}
+        />
+      )}
     </View>
   );
 };

@@ -1,12 +1,28 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { Player } from './Player';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
 
-const GameScreenComponent = () => {
+export interface GameScreenTypes {
+  tileSize: number;
+  windowWidth: number;
+  gameDisplayHeight: number;
+}
+
+const GameScreenComponent = ({
+  tileSize,
+  windowWidth,
+  gameDisplayHeight,
+}: GameScreenTypes) => {
   return (
     <View style={styles.container}>
       <LobbyRoom />
+      <Player
+        tileSize={tileSize}
+        windowWidth={windowWidth}
+        gameDisplayHeight={gameDisplayHeight}
+      />
     </View>
   );
 };
