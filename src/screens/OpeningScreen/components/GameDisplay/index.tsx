@@ -2,12 +2,14 @@ import React, { memo } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 
 import { black } from '../../../../../assets/AnimationOpening/stylesColorsCode';
+import { ArrowType } from '../GameControls/DirectionalCross/DirectionalArrow/types';
 import { AnimationOpening } from './AnimationOpening/index';
 import { GameScreen } from './GameScreen';
 import { GameStatesTypes } from './useGameStateManager';
 
-interface GameDisplayComponentProps {
+export interface GameDisplayComponentProps {
   gameState: GameStatesTypes;
+  isPressed: ArrowType | false;
 }
 
 const HORIZONTAL_TILE_COUNT = 16;
@@ -18,7 +20,10 @@ const tileSize = windowWidth / HORIZONTAL_TILE_COUNT;
 
 const gameDisplayHeight = tileSize * VERTICAL_TILE_COUNT;
 
-const GameDisplayComponent = ({ gameState }: GameDisplayComponentProps) => {
+const GameDisplayComponent = ({
+  gameState,
+  isPressed,
+}: GameDisplayComponentProps) => {
   return (
     <View style={styles.gameDisplayContainer}>
       {gameState === 'AnimationOpening' ? (
@@ -28,6 +33,7 @@ const GameDisplayComponent = ({ gameState }: GameDisplayComponentProps) => {
           tileSize={tileSize}
           windowWidth={windowWidth}
           gameDisplayHeight={gameDisplayHeight}
+          isPressed={isPressed}
         />
       )}
     </View>

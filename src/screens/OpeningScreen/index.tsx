@@ -8,11 +8,11 @@ import { useGameStateManager } from './components/GameDisplay/useGameStateManage
 
 const OpeningScreenComponent = () => {
   const { gameState, redirectToGameScreen } = useGameStateManager();
-  const { panResponder } = useDirectionalCross();
+  const { isPressed, panResponder } = useDirectionalCross();
 
   return (
     <View style={styles.gameAndControlsContainer}>
-      <GameDisplay gameState={gameState} />
+      <GameDisplay gameState={gameState} isPressed={isPressed} />
       <GameControls
         redirectToGameScreen={redirectToGameScreen}
         panResponder={panResponder}
