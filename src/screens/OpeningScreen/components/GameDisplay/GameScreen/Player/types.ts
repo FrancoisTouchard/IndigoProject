@@ -3,22 +3,24 @@ import { Source } from 'react-native-fast-image';
 export interface PlayerComponentProps {
   imagesPaths: {
     up: {
-      standby: Source;
-      step1: Source;
-      step2: Source;
+      standby: Source['uri'];
+      step1: Source['uri'];
+      step2: Source['uri'];
     };
     down: {
-      standby: Source;
-      step1: Source;
-      step2: Source;
+      standby: Source['uri'];
+      step1: Source['uri'];
+      step2: Source['uri'];
     };
     left: {
-      standby: Source;
-      step: Source;
+      standby: Source['uri'];
+      step1: Source['uri'];
+      step2: Source['uri'];
     };
     right: {
-      standby: Source;
-      step: Source;
+      standby: Source['uri'];
+      step1: Source['uri'];
+      step2: Source['uri'];
     };
   };
 }

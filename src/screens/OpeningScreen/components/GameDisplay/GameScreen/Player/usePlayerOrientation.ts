@@ -1,59 +1,50 @@
 import { useEffect, useRef, useState } from 'react';
+import { Source } from 'react-native-fast-image';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
-import { PlayerComponentProps } from './types';
-
-const IMAGES_PATHS: PlayerComponentProps['imagesPaths'] = {
-  up: {
-    standby: require('../../../../../../../assets/Player/RedStandbyBack.png'),
-    step1: require('../../../../../../../assets/Player/RedGoingUp1.png'),
-    step2: require('../../../../../../../assets/Player/RedGoingUp2.png'),
-  },
-  down: {
-    standby: require('../../../../../../../assets/Player/RedStandbyFace.png'),
-    step1: require('../../../../../../../assets/Player/RedGoingDown1.png'),
-    step2: require('../../../../../../../assets/Player/RedGoingDown2.png'),
-  },
-  left: {
-    standby: require('../../../../../../../assets/Player/RedStandbyLeft.png'),
-    step: require('../../../../../../../assets/Player/RedGoingLeft.png'),
-  },
-  right: {
-    standby: require('../../../../../../../assets/Player/RedStandbyRight.png'),
-    step: require('../../../../../../../assets/Player/RedGoingRight.png'),
-  },
-};
-
-export const getPathConfigFromDirection = (direction: ArrowType | false) => {
-  switch (direction) {
-    case 'down':
-      return IMAGES_PATHS.down.standby;
-    case 'up':
-      return IMAGES_PATHS.up.standby;
-    case 'left':
-      return IMAGES_PATHS.left.standby;
-    case 'right':
-      return IMAGES_PATHS.right.standby;
-    default:
-      return IMAGES_PATHS.down.standby;
-  }
-};
+import {
+  getPathConfigFromDirection,
+  IMAGES_PATHS,
+} from './services/getPathConfigFromDirection';
 
 export const usePlayerOrientation = (isPressed: ArrowType | false) => {
-  const [currentFramePath, setCurrentFramePath] = useState(
+  const [currentFramePath, setCurrentFramePath] = useState<Source['uri']>(
     IMAGES_PATHS.down.standby,
   );
 
   const isPressedPreviousValue = useRef<ArrowType | false>(false);
 
+  const animatePlayerWithDirection = (orientation: ArrowType) => {
+    const pathConfig = getPathConfigFromDirection(orientation);
+    const animationFrames = [pathConfig.step1, pathConfig.step2];
+    let isFirstFrame = true;
+
+    // Animation de la marche en 2 frames
+    const interval = setInterval(() => {
+      setCurrentFramePath(
+        isFirstFrame ? animationFrames[0] : animationFrames[1],
+      );
+
+      isFirstFrame = !isFirstFrame;
+    }, 200);
+
+    // Clear quand isPressed change
+    return () => clearInterval(interval);
+  };
+
   useEffect(() => {
     if (isPressed) {
       isPressedPreviousValue.current = isPressed;
-      setCurrentFramePath(getPathConfigFromDirection(isPressed));
+      setCurrentFramePath(getPathConfigFromDirection(isPressed).standby);
+
+      const clearAnimation = animatePlayerWithDirection(isPressed);
+      return clearAnimation;
     } else {
+      // frame finale = standby dans la dernière direction utilisée
       setCurrentFramePath(
-        getPathConfigFromDirection(isPressedPreviousValue.current),
+        getPathConfigFromDirection(isPressedPreviousValue.current).standby,
       );
+      return undefined;
     }
   }, [isPressed]);
 
