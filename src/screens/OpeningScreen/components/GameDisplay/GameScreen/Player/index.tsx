@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import FastImage, { Source } from 'react-native-fast-image';
 
 import { GameScreenTypes } from '../';
 import { usePlayerOrientation } from './usePlayerOrientation';
@@ -24,7 +24,7 @@ const PlayerComponent = ({
   return (
     <FastImage
       style={styles.image}
-      source={currentFramePath}
+      source={currentFramePath as Source}
       resizeMode={FastImage.resizeMode.contain}
     />
   );
