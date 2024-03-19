@@ -1,7 +1,7 @@
 import { ArrowType } from '../../../../GameControls/DirectionalCross/DirectionalArrow/types';
-import { PlayerComponentProps } from '../types';
+import { ImagesPaths } from '../types';
 
-export const IMAGES_PATHS: PlayerComponentProps['imagesPaths'] = {
+export const IMAGES_PATHS: ImagesPaths = {
   up: {
     standby: require('../../../../../../../../assets/Player/RedStandbyBack.png'),
     step1: require('../../../../../../../../assets/Player/RedGoingUp1.png'),
@@ -36,6 +36,6 @@ export const getPathConfigFromDirection = (direction: ArrowType | false) => {
     case 'right':
       return IMAGES_PATHS.right;
     default:
-      return IMAGES_PATHS.down;
+      return IMAGES_PATHS.up;
   }
 };
