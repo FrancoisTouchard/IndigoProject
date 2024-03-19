@@ -12,5 +12,5 @@ export const useDirectionalCross = () => {
 
   const { panResponder } = usePanResponder(setIsPressedOnce);
 
-  return { panResponder, isPressed };
+  return { isPressed, panResponder };
 };

@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef } from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const AnimationOpeningComponent = () => {
@@ -46,22 +46,22 @@ const AnimationOpeningComponent = () => {
       <Animated.View style={[styles.image, { opacity: opacityFirstImage }]}>
         <FastImage
           style={styles.image}
-          source={require('../../../../assets/AnimationOpening/titre.png')}
-          resizeMode={FastImage.resizeMode.cover}
+          source={require('../../../../../../assets/AnimationOpening/titre.png')}
+          resizeMode={FastImage.resizeMode.contain}
         />
       </Animated.View>
       <Animated.View style={[styles.image, { opacity: opacitySecondImage }]}>
         <FastImage
           style={styles.image}
-          source={require('../../../../assets/AnimationOpening/gameFreakLogo1.png')}
-          resizeMode={FastImage.resizeMode.cover}
+          source={require('../../../../../../assets/AnimationOpening/gameFreakLogo1.png')}
+          resizeMode={FastImage.resizeMode.contain}
         />
       </Animated.View>
       <Animated.View style={[styles.image, { opacity: opacityThirdImage }]}>
         <FastImage
           style={styles.image}
-          source={require('../../../../assets/AnimationOpening/startingImage.png')}
-          resizeMode={FastImage.resizeMode.cover}
+          source={require('../../../../../../assets/AnimationOpening/startingImage.png')}
+          resizeMode={FastImage.resizeMode.contain}
         />
       </Animated.View>
     </>
@@ -71,8 +71,10 @@ const AnimationOpeningComponent = () => {
 const styles = StyleSheet.create({
   image: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
 

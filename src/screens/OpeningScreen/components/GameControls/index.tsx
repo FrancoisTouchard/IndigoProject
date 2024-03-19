@@ -1,16 +1,27 @@
 import React, { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { PanResponderInstance, StyleSheet, View } from 'react-native';
 
-import { turquoise } from '../../../assets/AnimationOpening/stylesColorsCode';
+import { turquoise } from '../../../../../assets/AnimationOpening/stylesColorsCode';
 import { DirectionalCross } from './DirectionalCross';
+import { ArrowType } from './DirectionalCross/DirectionalArrow/types';
 import { PrimaryButton } from './PrimaryButton/index';
 import { SecondaryButton } from './SecondaryButton/index';
 
-const GameControlsComponent = () => {
+export interface GameControlComponentProps {
+  redirectToGameScreen: () => void;
+  panResponder: PanResponderInstance;
+  isPressed: false | ArrowType;
+}
+
+const GameControlsComponent = ({
+  redirectToGameScreen,
+  panResponder,
+  isPressed,
+}: GameControlComponentProps) => {
   return (
     <View style={styles.controlsContainer}>
       <View style={styles.primaryControlsContainer}>
-        <DirectionalCross />
+        <DirectionalCross panResponder={panResponder} isPressed={isPressed} />
         <View style={styles.abButtonsContainer}>
           <PrimaryButton buttonType={'B'} />
           <PrimaryButton buttonType={'A'} />
@@ -18,7 +29,7 @@ const GameControlsComponent = () => {
       </View>
       <View style={styles.secondaryControlsContainer}>
         <SecondaryButton buttonType={'Select'} />
-        <SecondaryButton buttonType={'Start'} />
+        <SecondaryButton buttonType={'Start'} onPress={redirectToGameScreen} />
       </View>
     </View>
   );
@@ -26,8 +37,7 @@ const GameControlsComponent = () => {
 
 const styles = StyleSheet.create({
   controlsContainer: {
-    width: '100%',
-    height: '55%',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: turquoise,

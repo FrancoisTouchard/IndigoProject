@@ -2,13 +2,13 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-import { StartSelButtonProps } from './types';
+import { AbButtonProps } from './types';
 
-const StartSelButtonComponent = ({ buttonType }: StartSelButtonProps) => {
+const AbButtonComponent = ({ buttonType }: AbButtonProps) => {
   const imageSource =
-    buttonType === 'Start'
-      ? require('../../../../../assets/GameControls/buttonStart.png')
-      : require('../../../../../assets/GameControls/buttonSelect.png');
+    buttonType === 'A'
+      ? require('../../../../../../../assets/GameControls/buttonA.png')
+      : require('../../../../../../../assets/GameControls/buttonB.png');
 
   return (
     <FastImage
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const StartSelButton = memo(StartSelButtonComponent);
+export const AbButton = memo(AbButtonComponent);

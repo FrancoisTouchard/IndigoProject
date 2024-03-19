@@ -43,7 +43,7 @@ const DirectionalArrowComponent = ({
     <View style={[styles.arrowContainer, arrowStyle]} pointerEvents="none">
       <FastImage
         style={styles.image}
-        source={require('../../../../../assets/GameControls/arrow.png')}
+        source={require('../../../../../../../assets/GameControls/arrow.png')}
         resizeMode={FastImage.resizeMode.contain}
       />
     </View>

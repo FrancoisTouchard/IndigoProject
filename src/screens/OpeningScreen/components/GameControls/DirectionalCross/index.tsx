@@ -1,15 +1,20 @@
 import React, { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { PanResponderInstance, StyleSheet, View } from 'react-native';
 
 import { DirectionalArrow } from './DirectionalArrow';
-import { useDirectionalCross } from './useDirectionalCross';
+import { ArrowType } from './DirectionalArrow/types';
+interface DirectionalCrossComponentProps {
+  panResponder: PanResponderInstance;
+  isPressed: false | ArrowType;
+}
 
 export const ARROW_CONTAINER_DIMENSIONS = 150;
 export const ARROW_CONTAINER_OFFSET_LEFT = 25;
 
-const DirectionalCrossComponent = () => {
-  const { panResponder, isPressed } = useDirectionalCross();
-
+const DirectionalCrossComponent = ({
+  panResponder,
+  isPressed,
+}: DirectionalCrossComponentProps) => {
   return (
     <View style={styles.crossContainer} {...panResponder.panHandlers}>
       <DirectionalArrow arrowType={'up'} isPressed={isPressed} />
