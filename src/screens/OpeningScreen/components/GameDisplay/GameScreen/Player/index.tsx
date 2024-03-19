@@ -2,25 +2,22 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage, { Source } from 'react-native-fast-image';
 
+import { gameDisplayHeight, tileSize, windowWidth } from '../..';
 import { GameScreenTypes } from '../';
 import { usePlayerOrientation } from './usePlayerOrientation';
 
-const PlayerComponent = ({
-  tileSize,
-  windowWidth,
-  gameDisplayHeight,
-  isPressed,
-}: GameScreenTypes) => {
+const PlayerComponent = ({ isPressed }: GameScreenTypes) => {
   const styles = StyleSheet.create({
     image: {
       width: tileSize,
       height: tileSize,
       position: 'absolute',
-      top: (gameDisplayHeight - tileSize) / 2,
-      left: (windowWidth - tileSize) / 2,
+      top: gameDisplayHeight / 2 - tileSize / 2,
+      left: windowWidth / 2 - tileSize / 2,
     },
   });
   const { currentFramePath } = usePlayerOrientation(isPressed);
+
   return (
     <FastImage
       style={styles.image}

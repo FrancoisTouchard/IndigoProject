@@ -12,13 +12,13 @@ export interface GameDisplayComponentProps {
   isPressed: ArrowType | false;
 }
 
-const HORIZONTAL_TILE_COUNT = 16;
-const VERTICAL_TILE_COUNT = 14.3;
+export const HORIZONTAL_TILE_COUNT = 16;
+export const VERTICAL_TILE_COUNT = 14.3;
 
-const windowWidth = Dimensions.get('window').width;
-const tileSize = windowWidth / HORIZONTAL_TILE_COUNT;
+export const windowWidth = Dimensions.get('window').width;
+export const tileSize = windowWidth / HORIZONTAL_TILE_COUNT;
 
-const gameDisplayHeight = tileSize * VERTICAL_TILE_COUNT;
+export const gameDisplayHeight = tileSize * VERTICAL_TILE_COUNT;
 
 const GameDisplayComponent = ({
   gameState,
@@ -29,12 +29,7 @@ const GameDisplayComponent = ({
       {gameState === 'AnimationOpening' ? (
         <AnimationOpening />
       ) : (
-        <GameScreen
-          tileSize={tileSize}
-          windowWidth={windowWidth}
-          gameDisplayHeight={gameDisplayHeight}
-          isPressed={isPressed}
-        />
+        <GameScreen isPressed={isPressed} />
       )}
     </View>
   );

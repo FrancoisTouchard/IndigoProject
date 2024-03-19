@@ -16,6 +16,7 @@ const OpeningScreenComponent = () => {
       <GameControls
         redirectToGameScreen={redirectToGameScreen}
         panResponder={panResponder}
+        isPressed={isPressed}
       />
     </View>
   );

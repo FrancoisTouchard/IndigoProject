@@ -6,27 +6,14 @@ import { Player } from './Player';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
 
 export interface GameScreenTypes {
-  tileSize: number;
-  windowWidth: number;
-  gameDisplayHeight: number;
   isPressed: ArrowType | false;
 }
 
-const GameScreenComponent = ({
-  tileSize,
-  windowWidth,
-  gameDisplayHeight,
-  isPressed,
-}: GameScreenTypes) => {
+const GameScreenComponent = ({ isPressed }: GameScreenTypes) => {
   return (
     <View style={styles.container}>
       <LobbyRoom />
-      <Player
-        tileSize={tileSize}
-        windowWidth={windowWidth}
-        gameDisplayHeight={gameDisplayHeight}
-        isPressed={isPressed}
-      />
+      <Player isPressed={isPressed} />
     </View>
   );
 };
