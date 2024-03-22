@@ -2,7 +2,12 @@ import React, { memo, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-import { gameDisplayHeight, tileSize } from '../../..';
+import {
+  gameDisplayHeight,
+  tileSize,
+  VERTICAL_TILE_COUNT,
+  windowWidth,
+} from '../../..';
 
 export const playerDefaultPositionX = 8;
 export const entrancePositionX = 7;
@@ -31,10 +36,23 @@ const LobbyRoomComponent = () => {
     },
   });
 
+  const findPlayerPositionWithOffset = (offsetY: number, offsetX: number) => {
+    /**
+     * defaultOffsetY et X correspondent à largeur/hauteur de l'écran noir qu'on verrait si le joueur était en position 0,0
+     */
+    const defaultOffsetY = VERTICAL_TILE_COUNT / 2 + 0.5 * tileSize;
+    const defaultOffsetX = windowWidth / 2 - tileSize / 2;
+
+    const Ycoordinate = Math.floor((defaultOffsetY - offsetY) / tileSize);
+    const Xcoordinate = Math.floor((defaultOffsetX - offsetX) / tileSize);
+    return `[${Ycoordinate}, ${Xcoordinate}]`;
+  };
+
   useEffect(() => {
     setInitialOffsetX(
       goToInitialXOffset(playerDefaultPositionX, entrancePositionX),
     );
+    findPlayerPositionWithOffset(initialOffsetY, initialOffsetX);
   }, []);
 
   return (
