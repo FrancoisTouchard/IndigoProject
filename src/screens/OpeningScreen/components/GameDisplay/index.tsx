@@ -37,7 +37,7 @@ const GameDisplayComponent = ({
 
 const styles = StyleSheet.create({
   gameDisplayContainer: {
-    width: '100%',
+    width: windowWidth,
     height: gameDisplayHeight,
     backgroundColor: black,
   },
