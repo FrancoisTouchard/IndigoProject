@@ -1,54 +1,50 @@
-import { TILE_SIZE, VERTICAL_TILE_COUNT, WINDOW_WIDTH } from '../..';
+import { TILE_SIZE, WINDOW_WIDTH } from '../..';
 import { LOBBYROOM_MAP_Y_COUNT } from './LobbyRoom/LobbyRoomMap';
 
-/**
- * @const TILE_SIZE_DOUBLED
- * Applique la valeur des offsets convertis en tiles
- * pour déplacer le background et ajuster la position de Player
- */
 export const TILE_SIZE_DOUBLED = TILE_SIZE * 2;
-
-/**
- * @const TILE_SIZE_HALVED
- * Centrer Player dans une tile
- */
 export const TILE_SIZE_HALVED = TILE_SIZE * 0.5;
 
 /**
- * @const DEFAULT_OFFSET_Y
- * Largeur/hauteur de l'écran noir qu'on voit quand Player est en y:0, x:0
- */
-export const DEFAULT_OFFSET_Y =
-  VERTICAL_TILE_COUNT / 2 + TILE_SIZE_DOUBLED + TILE_SIZE_HALVED;
-
-/**
  * @const DEFAULT_OFFSET_X
- * Largeur/hauteur de l'écran noir qu'on voit quand Player est en y:0, x:0
+ * Offset horizontal par défaut de l'image de background
  */
-export const DEFAULT_OFFSET_X =
-  WINDOW_WIDTH / 2 + TILE_SIZE_DOUBLED - TILE_SIZE_HALVED;
+export const DEFAULT_OFFSET_X = WINDOW_WIDTH / 2 - TILE_SIZE_HALVED;
 
 export const findPlayerPositionWithOffset = (
   offsetY: number,
   offsetX: number,
 ) => {
+  const DEFAULT_OFFSET_Y = goToInitialOffsetY();
   const Ycoordinate = Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE);
   const Xcoordinate = Math.floor((DEFAULT_OFFSET_X - offsetX) / TILE_SIZE);
 
-  return `[${Ycoordinate}, ${Xcoordinate}]`;
+  return { Ycoordinate, Xcoordinate };
 };
 
+/**
+ * @name goToInitialOffsetY
+ * @description retourne l'offset initial vertical en pixels de la background image
+ * @returns number offset en pixels
+ */
 export const goToInitialOffsetY = () => {
+  /**
+   * LOBBYROOM_MAP_Y_COUNT = nombre de tiles en hauteur
+   * TILE_SIZE = taille d'une tile
+   * Hauteur de la map en pixels = nombre de tiles * valeur en pixels d'une tile
+   */
   const MapHeightInPixels = LOBBYROOM_MAP_Y_COUNT * TILE_SIZE;
+  const direction = -1;
 
-  return -1 * (MapHeightInPixels / 2 - TILE_SIZE_HALVED);
+  return direction * (MapHeightInPixels / 2 - TILE_SIZE_HALVED);
 };
 
-export const goToInitialOffsetX = (
-  playerPositionX: number,
-  startingTilePositionX: number,
-) => {
-  const offsetToApply = playerPositionX - startingTilePositionX;
+/**
+ * @name goToInitialOffsetX
+ * @description retourne l'offset initial horizontal en pixels de la background image
+ * @returns number offset en pixels
+ */
+export const goToInitialOffsetX = (startingTilePositionX: number) => {
+  const offsetToApply = startingTilePositionX;
 
-  return TILE_SIZE * offsetToApply - TILE_SIZE_HALVED;
+  return TILE_SIZE * offsetToApply - DEFAULT_OFFSET_X;
 };
