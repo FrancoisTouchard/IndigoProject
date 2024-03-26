@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
@@ -7,39 +7,30 @@ import {
   TILE_SIZE,
   VERTICAL_TILE_COUNT,
 } from '../../..';
-import {
-  findPlayerPositionWithOffset,
-  goToInitialOffsetX,
-  goToInitialOffsetY,
-} from '../tileMapHelpers';
-
-export const PLAYER_DEFAULT_POSITION_X = 9;
-export const ENTRANCE_POSITION_X = 8;
+import { PlayerPositionIndicator } from '../../PlayerPositionIndicator';
+import { useLobbyRoom } from './useLobbyRoom';
 
 const LobbyRoomComponent = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [initialOffsetY, setInitialOffsetY] = useState(goToInitialOffsetY());
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [initialOffsetX, setInitialOffsetX] = useState(
-    goToInitialOffsetX(PLAYER_DEFAULT_POSITION_X, ENTRANCE_POSITION_X),
-  );
-
-  useEffect(() => {
-    findPlayerPositionWithOffset(initialOffsetY, initialOffsetX);
-  }, []);
+  const { initialOffsetY, initialOffsetX } = useLobbyRoom();
 
   return (
-    <FastImage
-      style={[
-        styles.image,
-        {
-          top: initialOffsetY,
-          left: initialOffsetX,
-        },
-      ]}
-      source={require('../../../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png')}
-      resizeMode={FastImage.resizeMode.contain}
-    />
+    <>
+      <FastImage
+        style={[
+          styles.image,
+          {
+            top: initialOffsetY,
+            left: initialOffsetX,
+          },
+        ]}
+        source={require('../../../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png')}
+        resizeMode={FastImage.resizeMode.contain}
+      />
+      <PlayerPositionIndicator
+        Xcoordinate={initialOffsetX}
+        Ycoordinate={initialOffsetY}
+      />
+    </>
   );
 };
 
