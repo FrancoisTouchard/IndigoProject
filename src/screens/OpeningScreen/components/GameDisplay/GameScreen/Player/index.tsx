@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 
 import { GAME_DISPLAY_HEIGHT, TILE_SIZE, WINDOW_WIDTH } from '../..';
 import { GameScreenTypes } from '../';
-import { GAP_FIXER_TILE } from '../RoomsBackgrounds/tileMapHelpers';
+import { TILE_SIZE_HALVED } from '../RoomsBackgrounds/tileMapHelpers';
 import { usePlayerOrientation } from './usePlayerOrientation';
 
 const PlayerComponent = ({ isPressed }: GameScreenTypes) => {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     width: TILE_SIZE,
     height: TILE_SIZE,
     position: 'absolute',
-    top: GAME_DISPLAY_HEIGHT / 2 - GAP_FIXER_TILE,
-    left: WINDOW_WIDTH / 2 - GAP_FIXER_TILE,
+    top: GAME_DISPLAY_HEIGHT / 2 - TILE_SIZE_HALVED,
+    left: WINDOW_WIDTH / 2 - TILE_SIZE_HALVED,
   },
 });

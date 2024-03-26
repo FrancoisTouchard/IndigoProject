@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 import {
+  HORIZONTAL_TILE_COUNT,
+  TILE_SIZE,
+  VERTICAL_TILE_COUNT,
+} from '../../..';
+import {
   findPlayerPositionWithOffset,
   goToInitialOffsetX,
   goToInitialOffsetY,
@@ -25,7 +30,13 @@ const LobbyRoomComponent = () => {
 
   return (
     <FastImage
-      style={[styles.image, { top: initialOffsetY, left: initialOffsetX }]}
+      style={[
+        styles.image,
+        {
+          top: initialOffsetY,
+          left: initialOffsetX,
+        },
+      ]}
       source={require('../../../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png')}
       resizeMode={FastImage.resizeMode.contain}
     />
@@ -33,7 +44,11 @@ const LobbyRoomComponent = () => {
 };
 
 const styles = StyleSheet.create({
-  image: StyleSheet.absoluteFillObject,
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    width: HORIZONTAL_TILE_COUNT * TILE_SIZE,
+    height: VERTICAL_TILE_COUNT * TILE_SIZE,
+  },
 });
 
 export const LobbyRoom = memo(LobbyRoomComponent);

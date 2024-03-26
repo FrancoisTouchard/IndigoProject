@@ -1,27 +1,32 @@
-import {
-  GAME_DISPLAY_HEIGHT,
-  TILE_SIZE,
-  VERTICAL_TILE_COUNT,
-  WINDOW_WIDTH,
-} from '../..';
+import { TILE_SIZE, VERTICAL_TILE_COUNT, WINDOW_WIDTH } from '../..';
+import { LOBBYROOM_MAP_Y_COUNT } from './LobbyRoom/LobbyRoomMap';
 
 /**
- * @const DEFAULT_OFFSET_Y et @const DEFAULT_OFFSET_X
- * Largeur/hauteur de l'écran noir qu'on voit quand Player est en y:0, x:0
- *
- * @const GAP_FIXER_OFFSET
+ * @const TILE_SIZE_DOUBLED
  * Applique la valeur des offsets convertis en tiles
  * pour déplacer le background et ajuster la position de Player
- *
- * @const GAP_FIXER_TILE
+ */
+export const TILE_SIZE_DOUBLED = TILE_SIZE * 2;
+
+/**
+ * @const TILE_SIZE_HALVED
  * Centrer Player dans une tile
  */
-export const GAP_FIXER_OFFSET = TILE_SIZE * 2;
-export const GAP_FIXER_TILE = TILE_SIZE * 0.5;
+export const TILE_SIZE_HALVED = TILE_SIZE * 0.5;
+
+/**
+ * @const DEFAULT_OFFSET_Y
+ * Largeur/hauteur de l'écran noir qu'on voit quand Player est en y:0, x:0
+ */
 export const DEFAULT_OFFSET_Y =
-  VERTICAL_TILE_COUNT / 2 + GAP_FIXER_OFFSET + GAP_FIXER_TILE;
+  VERTICAL_TILE_COUNT / 2 + TILE_SIZE_DOUBLED + TILE_SIZE_HALVED;
+
+/**
+ * @const DEFAULT_OFFSET_X
+ * Largeur/hauteur de l'écran noir qu'on voit quand Player est en y:0, x:0
+ */
 export const DEFAULT_OFFSET_X =
-  WINDOW_WIDTH / 2 + GAP_FIXER_OFFSET - GAP_FIXER_TILE;
+  WINDOW_WIDTH / 2 + TILE_SIZE_DOUBLED - TILE_SIZE_HALVED;
 
 export const findPlayerPositionWithOffset = (
   offsetY: number,
@@ -34,7 +39,9 @@ export const findPlayerPositionWithOffset = (
 };
 
 export const goToInitialOffsetY = () => {
-  return -1 * (GAME_DISPLAY_HEIGHT / 2 + GAP_FIXER_OFFSET + GAP_FIXER_TILE * 2);
+  const MapHeightInPixels = LOBBYROOM_MAP_Y_COUNT * TILE_SIZE;
+
+  return -1 * (MapHeightInPixels / 2 - TILE_SIZE_HALVED);
 };
 
 export const goToInitialOffsetX = (
@@ -43,5 +50,5 @@ export const goToInitialOffsetX = (
 ) => {
   const offsetToApply = playerPositionX - startingTilePositionX;
 
-  return TILE_SIZE * offsetToApply;
+  return TILE_SIZE * offsetToApply - TILE_SIZE_HALVED;
 };
