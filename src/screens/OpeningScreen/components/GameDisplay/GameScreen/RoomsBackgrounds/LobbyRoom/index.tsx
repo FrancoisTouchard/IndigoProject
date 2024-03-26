@@ -3,65 +3,37 @@ import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 import {
-  gameDisplayHeight,
-  tileSize,
-  VERTICAL_TILE_COUNT,
-  windowWidth,
-} from '../../..';
+  findPlayerPositionWithOffset,
+  goToInitialOffsetX,
+  goToInitialOffsetY,
+} from '../tileMapHelpers';
 
-export const playerDefaultPositionX = 8;
-export const entrancePositionX = 7;
-export const initialOffsetY =
-  -1 * (gameDisplayHeight - tileSize * 2 - tileSize / 2);
+export const PLAYER_DEFAULT_POSITION_X = 9;
+export const ENTRANCE_POSITION_X = 8;
 
 const LobbyRoomComponent = () => {
-  const [initialOffsetX, setInitialOffsetX] = useState(0);
-
-  const goToInitialXOffset = (
-    playerPositionX: number,
-    startingTilePositionX: number,
-  ) => {
-    const offsetToApply = playerPositionX - startingTilePositionX;
-    return -1 * (tileSize * offsetToApply) - tileSize / 2;
-  };
-
-  const styles = StyleSheet.create({
-    image: {
-      flex: 1,
-      position: 'absolute',
-      top: initialOffsetY,
-      right: initialOffsetX,
-      bottom: 0,
-      left: 0,
-    },
-  });
-
-  const findPlayerPositionWithOffset = (offsetY: number, offsetX: number) => {
-    /**
-     * defaultOffsetY et X correspondent à largeur/hauteur de l'écran noir qu'on verrait si le joueur était en position 0,0
-     */
-    const defaultOffsetY = VERTICAL_TILE_COUNT / 2 + 0.5 * tileSize;
-    const defaultOffsetX = windowWidth / 2 - tileSize / 2;
-
-    const Ycoordinate = Math.floor((defaultOffsetY - offsetY) / tileSize);
-    const Xcoordinate = Math.floor((defaultOffsetX - offsetX) / tileSize);
-    return `[${Ycoordinate}, ${Xcoordinate}]`;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [initialOffsetY, setInitialOffsetY] = useState(goToInitialOffsetY());
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [initialOffsetX, setInitialOffsetX] = useState(
+    goToInitialOffsetX(PLAYER_DEFAULT_POSITION_X, ENTRANCE_POSITION_X),
+  );
 
   useEffect(() => {
-    setInitialOffsetX(
-      goToInitialXOffset(playerDefaultPositionX, entrancePositionX),
-    );
     findPlayerPositionWithOffset(initialOffsetY, initialOffsetX);
   }, []);
 
   return (
     <FastImage
-      style={styles.image}
+      style={[styles.image, { top: initialOffsetY, left: initialOffsetX }]}
       source={require('../../../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png')}
       resizeMode={FastImage.resizeMode.contain}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  image: StyleSheet.absoluteFillObject,
+});
 
 export const LobbyRoom = memo(LobbyRoomComponent);
