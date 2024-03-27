@@ -15,7 +15,8 @@ export const findPlayerPositionWithOffset = (
   offsetX: number,
 ) => {
   const DEFAULT_OFFSET_Y = goToInitialOffsetY();
-  const Ycoordinate = Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE);
+  const Ycoordinate =
+    Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE) * -1 - 1;
   const Xcoordinate = Math.floor((DEFAULT_OFFSET_X - offsetX) / TILE_SIZE);
 
   return { Ycoordinate, Xcoordinate };
@@ -29,7 +30,6 @@ export const findPlayerPositionWithOffset = (
 export const goToInitialOffsetY = () => {
   /**
    * LOBBYROOM_MAP_Y_COUNT = nombre de tiles en hauteur
-   * TILE_SIZE = taille d'une tile
    * Hauteur de la map en pixels = nombre de tiles * valeur en pixels d'une tile
    */
   const MapHeightInPixels = LOBBYROOM_MAP_Y_COUNT * TILE_SIZE;
