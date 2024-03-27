@@ -20,6 +20,8 @@ export const usePlayerOrientation = (isPressed: ArrowType | false) => {
     const animationFrames = [pathConfig.step1, pathConfig.step2];
     let isFirstFrame = true;
 
+    setCurrentFramePath(pathConfig.standby);
+
     const interval = setInterval(() => {
       setCurrentFramePath(
         isFirstFrame ? animationFrames[0] : animationFrames[1],

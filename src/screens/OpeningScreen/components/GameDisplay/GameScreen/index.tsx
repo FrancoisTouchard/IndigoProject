@@ -12,7 +12,7 @@ export interface GameScreenTypes {
 const GameScreenComponent = ({ isPressed }: GameScreenTypes) => {
   return (
     <View style={styles.container}>
-      <LobbyRoom />
+      <LobbyRoom isPressed={isPressed} />
       <Player isPressed={isPressed} />
     </View>
   );
@@ -20,8 +20,7 @@ const GameScreenComponent = ({ isPressed }: GameScreenTypes) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
   },
 });
 
