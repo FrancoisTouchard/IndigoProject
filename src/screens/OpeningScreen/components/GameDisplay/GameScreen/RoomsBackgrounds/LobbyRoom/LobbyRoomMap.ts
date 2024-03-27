@@ -8,7 +8,7 @@ const ACTION_PC = 'APC';
 
 export const LOBBYROOM_MAP_X_COUNT = 16;
 export const LOBBYROOM_MAP_Y_COUNT = 12;
-export const PLAYER_DEFAULT_POSITION_X = 9;
+export const PLAYER_DEFAULT_POSITION_X = 8;
 export const ENTRANCE_POSITION_X = 8;
 
 export const LobbyRoomMap = [

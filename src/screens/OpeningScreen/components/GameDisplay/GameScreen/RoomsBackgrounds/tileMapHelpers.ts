@@ -15,8 +15,17 @@ export const findPlayerPositionWithOffset = (
   offsetX: number,
 ) => {
   const DEFAULT_OFFSET_Y = goToInitialOffsetY();
+
+  /**
+   * @const YOffsetsSubstracted
+   * Gère le cas où Ycoordinate = 0 pour retourner 0 au lieu de -1
+   */
+  const YOffsetsSubstracted = Math.floor(DEFAULT_OFFSET_Y - offsetY);
   const Ycoordinate =
-    Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE) * -1 - 1;
+    YOffsetsSubstracted === 0
+      ? Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE)
+      : Math.floor((DEFAULT_OFFSET_Y - offsetY) / TILE_SIZE) * -1 - 1;
+
   const Xcoordinate = Math.floor((DEFAULT_OFFSET_X - offsetX) / TILE_SIZE);
 
   return { Ycoordinate, Xcoordinate };
