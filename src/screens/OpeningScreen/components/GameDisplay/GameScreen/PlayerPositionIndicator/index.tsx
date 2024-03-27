@@ -2,6 +2,10 @@ import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { white } from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
+import {
+  LOBBYROOM_MAP_Y_COUNT,
+  LobbyRoomMap,
+} from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
 import { findPlayerPositionWithOffset } from '../RoomsBackgrounds/tileMapHelpers';
 
 const PlayerPositionIndicatorComponent = ({
@@ -14,10 +18,15 @@ const PlayerPositionIndicatorComponent = ({
   const { Ycoordinate: YCoordinateTile, Xcoordinate: XCoordinateTile } =
     findPlayerPositionWithOffset(Ycoordinate, Xcoordinate);
 
+  let currentTileAllocation = null;
+  if (YCoordinateTile >= 0 && YCoordinateTile <= LOBBYROOM_MAP_Y_COUNT - 1) {
+    const tabIndexY = LOBBYROOM_MAP_Y_COUNT - YCoordinateTile - 1;
+    currentTileAllocation = LobbyRoomMap[tabIndexY][XCoordinateTile];
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        [{YCoordinateTile}, {XCoordinateTile}]
+        [{YCoordinateTile}, {XCoordinateTile} {currentTileAllocation}]
       </Text>
     </View>
   );
