@@ -13,7 +13,7 @@ export const useLobbyRoom = (isPressed: ArrowType | false) => {
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const stepPaceInPixels = TILE_SIZE / 27;
+  const stepPaceInPixels = TILE_SIZE / 30;
 
   const movePlayer = () => {
     let currentOffsetCounterY = OffsetY;

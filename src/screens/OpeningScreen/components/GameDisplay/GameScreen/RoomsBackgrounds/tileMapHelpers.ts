@@ -50,10 +50,11 @@ export const goToInitialOffsetY = () => {
 /**
  * @name goToInitialOffsetX
  * @description retourne l'offset initial horizontal en pixels de la background image
+ * On ajoute +1 TILE_SIZE pour transcrire des coordonnées d'array en un compte de tiles
  * @returns number offset en pixels
  */
 export const goToInitialOffsetX = (startingTilePositionX: number) => {
   const offsetToApply = startingTilePositionX;
 
-  return TILE_SIZE * offsetToApply - DEFAULT_OFFSET_X;
+  return TILE_SIZE * offsetToApply - DEFAULT_OFFSET_X + TILE_SIZE;
 };
