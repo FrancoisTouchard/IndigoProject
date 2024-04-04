@@ -2,31 +2,33 @@ import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { white } from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
-import {
-  LOBBYROOM_MAP_Y_COUNT,
-  LobbyRoomMap,
-} from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
+import { findTileAllocation } from '../RoomsBackgrounds/allocationHelpers';
+import { COLLISION_OVERLAP_IN_PIXELS } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
 import { findPlayerPositionWithOffset } from '../RoomsBackgrounds/tileMapHelpers';
 
 const PlayerPositionIndicatorComponent = ({
-  Xcoordinate,
-  Ycoordinate,
+  offsetY,
+  offsetX,
 }: {
-  Xcoordinate: number;
-  Ycoordinate: number;
+  offsetY: number;
+  offsetX: number;
 }) => {
-  const { Ycoordinate: YCoordinateTile, Xcoordinate: XCoordinateTile } =
-    findPlayerPositionWithOffset(Ycoordinate, Xcoordinate);
+  const { currentTileYArrayCoordinate, currentTileXArrayCoordinate } =
+    findPlayerPositionWithOffset(
+      offsetY + COLLISION_OVERLAP_IN_PIXELS,
+      offsetX - COLLISION_OVERLAP_IN_PIXELS,
+    );
 
-  let currentTileAllocation = null;
-  if (YCoordinateTile >= 0 && YCoordinateTile <= LOBBYROOM_MAP_Y_COUNT - 1) {
-    const tabIndexY = LOBBYROOM_MAP_Y_COUNT - YCoordinateTile - 1;
-    currentTileAllocation = LobbyRoomMap[tabIndexY][XCoordinateTile];
-  }
+  const currentTileAllocation = findTileAllocation(
+    currentTileYArrayCoordinate,
+    currentTileXArrayCoordinate,
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        [{YCoordinateTile}, {XCoordinateTile} {currentTileAllocation}]
+        [{currentTileYArrayCoordinate}, {currentTileXArrayCoordinate},
+        {currentTileAllocation}]
       </Text>
     </View>
   );
