@@ -1,59 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/DirectionalCross/DirectionalArrow/types';
 
-import { TILE_SIZE } from '../../..';
-import { goToInitialOffsetX, goToInitialOffsetY } from '../tileMapHelpers';
-import { ENTRANCE_POSITION_X } from './LobbyRoomMap';
+import { findTileAllocation } from '../allocationHelpers';
+import { getActionFromActionTile } from '../playerInteractionsHelpers';
+import {
+  findPlayerPositionWithOffset,
+  goToInitialOffsetX,
+  goToInitialOffsetY,
+} from '../tileMapHelpers';
+import {
+  ACTION_TILES,
+  COLLISION_OVERLAP_IN_PIXELS,
+  ENTRANCE_POSITION_X,
+} from './LobbyRoomMap';
+import { movePlayer } from './playerMovementHelpers';
+
+const INTERVAL_DURATION = 1;
 
 export const useLobbyRoom = (isPressed: ArrowType | false) => {
-  const [OffsetY, setOffsetY] = useState(goToInitialOffsetY());
-  const [OffsetX, setOffsetX] = useState(
+  const [offsetY, setOffsetY] = useState<number>(goToInitialOffsetY());
+  const [offsetX, setOffsetX] = useState<number>(
     goToInitialOffsetX(ENTRANCE_POSITION_X),
   );
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const stepPaceInPixels = TILE_SIZE / 30;
+  const locateAndMovePlayer = useCallback(() => {
+    const { currentTileYArrayCoordinate, currentTileXArrayCoordinate } =
+      findPlayerPositionWithOffset(
+        offsetY + COLLISION_OVERLAP_IN_PIXELS,
+        offsetX - COLLISION_OVERLAP_IN_PIXELS,
+      );
 
-  const movePlayer = () => {
-    let currentOffsetCounterY = OffsetY;
-    let currentOffsetCounterX = OffsetX;
+    const currentTileAllocation = findTileAllocation(
+      currentTileYArrayCoordinate,
+      currentTileXArrayCoordinate,
+    );
+
+    if (isPressed && ACTION_TILES.includes(currentTileAllocation)) {
+      getActionFromActionTile(currentTileAllocation, isPressed);
+    }
 
     intervalRef.current = setInterval(() => {
-      switch (isPressed) {
-        case 'up':
-          currentOffsetCounterY += stepPaceInPixels;
-          setOffsetY(currentOffsetCounterY);
-          break;
-
-        case 'down':
-          currentOffsetCounterY -= stepPaceInPixels;
-          setOffsetY(currentOffsetCounterY);
-          break;
-
-        case 'left':
-          currentOffsetCounterX += stepPaceInPixels;
-          setOffsetX(currentOffsetCounterX);
-          break;
-
-        case 'right':
-          currentOffsetCounterX -= stepPaceInPixels;
-          setOffsetX(currentOffsetCounterX);
-          break;
-
-        default:
-          break;
-      }
-    }, 1);
-  };
+      movePlayer({ offsetY, offsetX, setOffsetY, setOffsetX, isPressed });
+    }, INTERVAL_DURATION);
+  }, [isPressed, offsetY, offsetX]);
 
   useEffect(() => {
     clearInterval(intervalRef.current as NodeJS.Timeout);
 
     if (isPressed) {
-      movePlayer();
+      locateAndMovePlayer();
     }
-  }, [isPressed]);
+  }, [isPressed, locateAndMovePlayer]);
 
-  return { OffsetY, OffsetX };
+  return { offsetY, offsetX };
 };
