@@ -12,7 +12,7 @@ import { PlayerPositionIndicator } from '../../PlayerPositionIndicator';
 import { useLobbyRoom } from './useLobbyRoom';
 
 const LobbyRoomComponent = ({ isPressed }: GameScreenTypes) => {
-  const { OffsetY, OffsetX } = useLobbyRoom(isPressed);
+  const { offsetY, offsetX } = useLobbyRoom(isPressed);
 
   return (
     <>
@@ -20,14 +20,14 @@ const LobbyRoomComponent = ({ isPressed }: GameScreenTypes) => {
         style={[
           styles.image,
           {
-            top: OffsetY,
-            left: OffsetX,
+            top: offsetY,
+            left: offsetX,
           },
         ]}
         source={require('../../../../../../../../assets/RoomsBackgrounds/LobbyRoom/LobbyRoom.png')}
         resizeMode={FastImage.resizeMode.contain}
       />
-      <PlayerPositionIndicator Xcoordinate={OffsetX} Ycoordinate={OffsetY} />
+      <PlayerPositionIndicator offsetY={offsetY} offsetX={offsetX} />
     </>
   );
 };
