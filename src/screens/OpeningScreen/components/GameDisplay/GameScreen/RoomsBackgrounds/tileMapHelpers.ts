@@ -22,18 +22,18 @@ export const findPlayerPositionWithOffset = (
 ) => {
   const DEFAULT_OFFSET_Y = goToInitialOffsetY();
 
-  const YcoordinateOffsetInTiles = Math.floor(
-    (DEFAULT_OFFSET_Y - offsetY - TILE_SIZE_HALVED) / TILE_SIZE,
+  const YCoordinateOffsetInTiles = Math.floor(
+    (DEFAULT_OFFSET_Y - offsetY - 1) / TILE_SIZE,
   );
 
   /**
    * @const Ycoordinate
    * Convertit offsetY en positif et lui attribue l'emplacement correspondant dans l'array LobbyRoomMap
    */
-  const currentTileYArrayCoordinate = YcoordinateOffsetInTiles * direction - 1;
+  const currentTileYArrayCoordinate = YCoordinateOffsetInTiles * direction - 1;
 
   const currentTileXArrayCoordinate = Math.floor(
-    (DEFAULT_OFFSET_X - offsetX + TILE_SIZE_HALVED) / TILE_SIZE,
+    (DEFAULT_OFFSET_X - offsetX) / TILE_SIZE,
   );
 
   return { currentTileYArrayCoordinate, currentTileXArrayCoordinate };
