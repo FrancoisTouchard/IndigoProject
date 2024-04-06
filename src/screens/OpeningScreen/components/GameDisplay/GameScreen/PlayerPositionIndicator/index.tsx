@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { white } from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
-import { findTileAllocation } from '../RoomsBackgrounds/allocationHelpers';
 import { COLLISION_OVERLAP_IN_PIXELS } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
+import { findTileAllocation } from '../RoomsBackgrounds/tileAllocationHelpers';
 import { findPlayerPositionWithOffset } from '../RoomsBackgrounds/tileMapHelpers';
 
 const PlayerPositionIndicatorComponent = ({

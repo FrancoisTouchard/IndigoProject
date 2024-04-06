@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/DirectionalCross/DirectionalArrow/types';
 
-import { findTileAllocation } from '../allocationHelpers';
 import { getActionFromActionTile } from '../playerInteractionsHelpers';
+import { findTileAllocation } from '../tileAllocationHelpers';
 import {
   findPlayerPositionWithOffset,
   goToInitialOffsetX,

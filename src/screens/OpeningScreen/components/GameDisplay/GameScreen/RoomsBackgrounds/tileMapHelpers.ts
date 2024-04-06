@@ -1,12 +1,12 @@
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
 import { TILE_SIZE, WINDOW_WIDTH } from '../..';
-import { findNextStepAllocation } from './allocationHelpers';
 import {
   COLLISION_OVERLAP_IN_PIXELS,
   LOBBYROOM_MAP_Y_COUNT,
   TILE_SIZE_HALVED,
   X,
 } from './LobbyRoom/LobbyRoomMap';
+import { findNextStepAllocation } from './tileAllocationHelpers';
 
 const direction = -1;
 
