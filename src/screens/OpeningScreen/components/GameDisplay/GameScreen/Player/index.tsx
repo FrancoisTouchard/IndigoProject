@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 
 import { GAME_DISPLAY_HEIGHT, TILE_SIZE, WINDOW_WIDTH } from '../..';
 import { GameScreenTypes } from '../';
-import { TILE_SIZE_HALVED } from '../RoomsBackgrounds/tileMapHelpers';
+import { TILE_SIZE_HALVED } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
 import { usePlayerOrientation } from './usePlayerOrientation';
 
 const PlayerComponent = ({ isPressed }: GameScreenTypes) => {

@@ -1,14 +1,33 @@
-const O = 'O';
-const X = 'X';
-const EXIT = 'EX';
-const ENTRANCE = 'EN';
-const ACTION_POKESHOP = 'APS';
-const ACTION_POKECENTER = 'APKC';
-const ACTION_PC = 'APC';
+import { TILE_SIZE } from '../../..';
+
+export const O = 'O';
+export const X = 'X';
+export const EXIT = 'EX';
+export const ENTRANCE = 'EN';
+export const ACTION_POKESHOP = 'APS';
+export const ACTION_POKECENTER = 'APKC';
+export const ACTION_PC = 'APC';
+export const WALKABLE_TILE = [
+  O,
+  ENTRANCE,
+  EXIT,
+  ACTION_POKESHOP,
+  ACTION_POKECENTER,
+  ACTION_PC,
+];
+export const ACTION_TILES = [
+  EXIT,
+  ACTION_POKESHOP,
+  ACTION_POKECENTER,
+  ACTION_PC,
+];
 
 export const LOBBYROOM_MAP_X_COUNT = 16;
 export const LOBBYROOM_MAP_Y_COUNT = 12;
 export const ENTRANCE_POSITION_X = 7;
+export const TILE_SIZE_HALVED = TILE_SIZE * 0.5;
+export const STEP_PACE_IN_PIXELS = TILE_SIZE / 20;
+export const COLLISION_OVERLAP_IN_PIXELS = 3;
 
 export const LobbyRoomMap = [
   [X, X, X, X, X, X, X, X, EXIT, X, X, X, X, X, X, X],

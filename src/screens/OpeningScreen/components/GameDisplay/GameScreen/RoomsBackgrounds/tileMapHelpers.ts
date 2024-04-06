@@ -1,9 +1,14 @@
+import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
 import { TILE_SIZE, WINDOW_WIDTH } from '../..';
-import { LOBBYROOM_MAP_Y_COUNT } from './LobbyRoom/LobbyRoomMap';
+import {
+  COLLISION_OVERLAP_IN_PIXELS,
+  LOBBYROOM_MAP_Y_COUNT,
+  TILE_SIZE_HALVED,
+  X,
+} from './LobbyRoom/LobbyRoomMap';
+import { findNextStepAllocation } from './tileAllocationHelpers';
 
-export const TILE_SIZE_DOUBLED = TILE_SIZE * 2;
-export const TILE_SIZE_HALVED = TILE_SIZE * 0.5;
-export const DIRECTION = -1;
+const direction = -1;
 
 /**
  * @const DEFAULT_OFFSET_X
@@ -17,21 +22,21 @@ export const findPlayerPositionWithOffset = (
 ) => {
   const DEFAULT_OFFSET_Y = goToInitialOffsetY();
 
-  const YcoordinateOffsetInTiles = Math.floor(
-    (DEFAULT_OFFSET_Y - offsetY - TILE_SIZE_HALVED) / TILE_SIZE,
+  const YCoordinateOffsetInTiles = Math.floor(
+    (DEFAULT_OFFSET_Y - offsetY - 1) / TILE_SIZE,
   );
 
   /**
    * @const Ycoordinate
    * Convertit offsetY en positif et lui attribue l'emplacement correspondant dans l'array LobbyRoomMap
    */
-  const Ycoordinate = YcoordinateOffsetInTiles * DIRECTION - 1;
+  const currentTileYArrayCoordinate = YCoordinateOffsetInTiles * direction - 1;
 
-  const Xcoordinate = Math.floor(
-    (DEFAULT_OFFSET_X - offsetX + TILE_SIZE_HALVED) / TILE_SIZE,
+  const currentTileXArrayCoordinate = Math.floor(
+    (DEFAULT_OFFSET_X - offsetX) / TILE_SIZE,
   );
 
-  return { Ycoordinate, Xcoordinate };
+  return { currentTileYArrayCoordinate, currentTileXArrayCoordinate };
 };
 
 /**
@@ -39,14 +44,14 @@ export const findPlayerPositionWithOffset = (
  * @description retourne l'offset initial vertical en pixels de la background image
  * @returns number offset en pixels
  */
-export const goToInitialOffsetY = () => {
+export const goToInitialOffsetY = (): number => {
   /**
    * LOBBYROOM_MAP_Y_COUNT = nombre de tiles en hauteur
    * Hauteur de la map en pixels = nombre de tiles * valeur en pixels d'une tile
    */
   const MapHeightInPixels = LOBBYROOM_MAP_Y_COUNT * TILE_SIZE;
 
-  return DIRECTION * (MapHeightInPixels / 2 - TILE_SIZE_HALVED);
+  return direction * (MapHeightInPixels / 2 - TILE_SIZE_HALVED);
 };
 
 /**
@@ -59,4 +64,45 @@ export const goToInitialOffsetX = (startingTilePositionX: number) => {
   const offsetToApply = startingTilePositionX;
 
   return TILE_SIZE * offsetToApply - DEFAULT_OFFSET_X + TILE_SIZE;
+};
+
+export const isPlayerCornersInAllowedTile = (
+  currentOffsetCounterY: number,
+  currentOffsetCounterX: number,
+  isPressed: ArrowType,
+) => {
+  const nextStepInfosTopLeftCorner = findNextStepAllocation(
+    currentOffsetCounterY + TILE_SIZE - COLLISION_OVERLAP_IN_PIXELS,
+    currentOffsetCounterX - COLLISION_OVERLAP_IN_PIXELS,
+    isPressed,
+  );
+  const nextStepInfosTopRightCorner = findNextStepAllocation(
+    currentOffsetCounterY + TILE_SIZE - COLLISION_OVERLAP_IN_PIXELS,
+    currentOffsetCounterX - TILE_SIZE + COLLISION_OVERLAP_IN_PIXELS,
+    isPressed,
+  );
+  const nextStepInfosBottomRightCorner = findNextStepAllocation(
+    currentOffsetCounterY + COLLISION_OVERLAP_IN_PIXELS,
+    currentOffsetCounterX - TILE_SIZE + COLLISION_OVERLAP_IN_PIXELS,
+    isPressed,
+  );
+  const nextStepInfosBottomLeftCorner = findNextStepAllocation(
+    currentOffsetCounterY + COLLISION_OVERLAP_IN_PIXELS,
+    currentOffsetCounterX - COLLISION_OVERLAP_IN_PIXELS,
+    isPressed,
+  );
+
+  const isOutOfBonds =
+    nextStepInfosTopLeftCorner.isPlayerOutOfBonds ||
+    nextStepInfosTopRightCorner.isPlayerOutOfBonds ||
+    nextStepInfosBottomLeftCorner.isPlayerOutOfBonds ||
+    nextStepInfosBottomRightCorner.isPlayerOutOfBonds;
+
+  return (
+    nextStepInfosTopLeftCorner.nextStepAllocation !== X &&
+    nextStepInfosTopRightCorner.nextStepAllocation !== X &&
+    nextStepInfosBottomRightCorner.nextStepAllocation !== X &&
+    nextStepInfosBottomLeftCorner.nextStepAllocation !== X &&
+    !isOutOfBonds
+  );
 };
