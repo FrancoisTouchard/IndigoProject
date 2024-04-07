@@ -1,14 +1,46 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# About the Indigo Project
 
-# Getting Started
+Welcome back to the world of Pokémon !
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+As part of my portfolio, this project consists in a remake of the Indigo Plateau level from the first generation games.
 
-## Step 1: Start the Metro Server
+The aim here is to reproduce a faithful and convincing game experience, adapting pre 2000's Game Boy graphic assets to a modern React Native application.
+</br>
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Getting Started
 
-To start Metro, run the following command from the _root_ of your React Native project:
+This [**React Native**](https://reactnative.dev) project was bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).  
+
+
+### Step 1: Clone the repo and install dependencies
+
+After cloning this repo, run the following command from the _root_ of the project to install dependencies:
+
+
+```bash
+# using npm
+npm install
+
+# OR using Yarn
+yarn install
+```
+
+If you are running this project on an iPhone device/simulator, install the pods as well: 
+
+```bash
+# go to ios directory
+cd ios
+
+# install the pods
+pod install
+```
+</br>
+
+## Step 2: Start the Metro Server
+
+Start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+
+To start Metro, run the following command from the _root_ of the project:
 
 ```bash
 # using npm
@@ -17,8 +49,10 @@ npm start
 # OR using Yarn
 yarn start
 ```
+</br>
 
-## Step 2: Start your Application
+
+## Step 3: Start your Application
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
@@ -41,39 +75,35 @@ npm run ios
 # OR using Yarn
 yarn ios
 ```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+</br>
 
 ## Congratulations! :tada:
+If everything is set up _correctly_, you should see your the app running in your _Android or Apple device_ or _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-You've successfully run and modified your React Native App. :partying_face:
+This is one way to run the app — you can also run it directly from within Android Studio and Xcode respectively.
 
-### Now what?
+You should see a splash screen followed by a quick starting animation.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+Press the Start button to begin, and enjoy! :partying_face:
+</br>
 
-# Troubleshooting
+# Currently available features
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- [x] Custom splash screen while app is getting ready
+- [x] Basic yet effective Game Boy Color UI
+- [x] First room map with character movement and collision management systems  
+</br>
 
-# Learn More
+# Features coming next
+- [ ] Add Pokémons to your team using the PC, among the original first 151 species.
+- [ ] Buy some items from the shop
+- [ ] Battles against the 5 league members
+- [ ] A better UI design  
+</br>
 
-To learn more about React Native, take a look at the following resources:
+# Contact
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+My name is François Touchard and I wrote my very first line of code in October 2022.  
+I'm currently looking to improve my skills as a front-end developer.
+
+I value feedbacks and advices from more experienced developers, [contact me on Linkedin !](https://www.linkedin.com/in/françois-touchard-72950946/)
