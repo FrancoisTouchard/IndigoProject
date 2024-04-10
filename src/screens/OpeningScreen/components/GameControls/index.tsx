@@ -56,8 +56,6 @@ const styles = StyleSheet.create({
   abButtonsContainer: {
     flex: 1,
     height: '50%',
-    marginTop: '20%',
-    marginBottom: '10%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
