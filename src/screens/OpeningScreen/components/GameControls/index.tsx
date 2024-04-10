@@ -11,12 +11,14 @@ export interface GameControlComponentProps {
   redirectToGameScreen: () => void;
   panResponder: PanResponderInstance;
   isPressed: false | ArrowType;
+  handlePlayerCurrentInteraction: () => void;
 }
 
 const GameControlsComponent = ({
   redirectToGameScreen,
   panResponder,
   isPressed,
+  handlePlayerCurrentInteraction,
 }: GameControlComponentProps) => {
   return (
     <View style={styles.controlsContainer}>
@@ -24,7 +26,10 @@ const GameControlsComponent = ({
         <DirectionalCross panResponder={panResponder} isPressed={isPressed} />
         <View style={styles.abButtonsContainer}>
           <PrimaryButton buttonType={'B'} />
-          <PrimaryButton buttonType={'A'} />
+          <PrimaryButton
+            buttonType={'A'}
+            handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
+          />
         </View>
       </View>
       <View style={styles.secondaryControlsContainer}>
