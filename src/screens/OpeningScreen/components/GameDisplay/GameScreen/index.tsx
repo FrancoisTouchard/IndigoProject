@@ -21,6 +21,7 @@ const GameScreenComponent = ({
       {playerCurrentInteraction && (
         <PlayerCurrentInteraction
           playerCurrentInteraction={playerCurrentInteraction}
+          isPressed={isPressed}
         />
       )}
     </View>

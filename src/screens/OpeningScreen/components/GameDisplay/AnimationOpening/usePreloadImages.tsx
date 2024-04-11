@@ -25,6 +25,7 @@ export const usePreloadImages = (redirectToNextScreen: () => void) => {
       require('../../../../../../assets/Player/RedGoingUp2.png'),
       // MenuScreens
       require('../../../../../../assets/MenusScreens/menuTemplateLarge.png'),
+      require('../../../../../../assets/MenusScreens/ListSelector.png'),
     ];
 
     const uris = images.map(image => {
