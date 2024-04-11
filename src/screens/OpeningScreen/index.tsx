@@ -29,7 +29,11 @@ const OpeningScreenComponent = () => {
 
   return (
     <View style={styles.gameAndControlsContainer}>
-      <GameDisplay gameState={gameState} isPressed={isPressed} />
+      <GameDisplay
+        gameState={gameState}
+        isPressed={isPressed}
+        playerCurrentInteraction={playerCurrentInteraction}
+      />
       <GameControls
         panResponder={panResponder}
         isPressed={isPressed}
