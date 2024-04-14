@@ -15,13 +15,15 @@ export const GAME_DISPLAY_HEIGHT = TILE_SIZE * VERTICAL_TILE_COUNT;
 const GameDisplayComponent = ({
   gameState,
   isPressed,
+  offsetY,
+  offsetX,
 }: GameDisplayComponentProps) => {
   return (
     <View style={styles.gameDisplayContainer}>
       {gameState === 'AnimationOpening' ? (
         <AnimationOpening />
       ) : (
-        <GameScreen isPressed={isPressed} />
+        <GameScreen isPressed={isPressed} offsetY={offsetY} offsetX={offsetX} />
       )}
     </View>
   );

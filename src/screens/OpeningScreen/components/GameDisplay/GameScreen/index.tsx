@@ -5,14 +5,25 @@ import { ArrowType } from '../../GameControls/DirectionalCross/DirectionalArrow/
 import { Player } from './Player';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
 
-export interface GameScreenTypes {
+export interface LobbyRoomProps {
+  offsetY: number;
+  offsetX: number;
+}
+
+interface PlayerProps {
   isPressed: ArrowType | false;
 }
 
-const GameScreenComponent = ({ isPressed }: GameScreenTypes) => {
+type GameScreenProps = LobbyRoomProps & PlayerProps;
+
+const GameScreenComponent = ({
+  isPressed,
+  offsetY,
+  offsetX,
+}: GameScreenProps) => {
   return (
     <View style={styles.container}>
-      <LobbyRoom isPressed={isPressed} />
+      <LobbyRoom offsetY={offsetY} offsetX={offsetX} />
       <Player isPressed={isPressed} />
     </View>
   );

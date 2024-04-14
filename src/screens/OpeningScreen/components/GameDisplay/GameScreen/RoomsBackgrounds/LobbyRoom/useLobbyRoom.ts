@@ -1,20 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/DirectionalCross/DirectionalArrow/types';
 
-import { getActionFromActionTile } from '../playerInteractionsHelpers';
-import { findTileAllocation } from '../tileAllocationHelpers';
 import {
-  findPlayerPositionWithOffset,
   goToInitialOffsetX,
   goToInitialOffsetY,
   isPlayerCornersInAllowedTile,
 } from '../tileMapHelpers';
-import {
-  ACTION_TILES,
-  COLLISION_OVERLAP_IN_PIXELS,
-  ENTRANCE_POSITION_X,
-  STEP_PACE_IN_PIXELS,
-} from './LobbyRoomMap';
+import { ENTRANCE_POSITION_X, STEP_PACE_IN_PIXELS } from './LobbyRoomMap';
 
 const INTERVAL_DURATION = 1;
 
@@ -96,26 +88,9 @@ export const useLobbyRoom = (isPressed: ArrowType | false) => {
 
   /**
    * Règle eslint pour enlever un warning dont la résolution pose problème
-   *
-   *
    */
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const locateAndMovePlayer = () => {
-    const { currentTileYArrayCoordinate, currentTileXArrayCoordinate } =
-      findPlayerPositionWithOffset(
-        offsetY + COLLISION_OVERLAP_IN_PIXELS,
-        offsetX - COLLISION_OVERLAP_IN_PIXELS,
-      );
-
-    const currentTileAllocation = findTileAllocation(
-      currentTileYArrayCoordinate,
-      currentTileXArrayCoordinate,
-    );
-
-    if (isPressed && ACTION_TILES.includes(currentTileAllocation)) {
-      getActionFromActionTile(currentTileAllocation, isPressed);
-    }
-
     intervalRef.current = setInterval(() => {
       movePlayer();
     }, INTERVAL_DURATION);
@@ -123,10 +98,7 @@ export const useLobbyRoom = (isPressed: ArrowType | false) => {
 
   useEffect(() => {
     clearInterval(intervalRef.current as NodeJS.Timeout);
-
-    if (isPressed) {
-      locateAndMovePlayer();
-    }
+    locateAndMovePlayer();
   }, [isPressed, locateAndMovePlayer]);
 
   return { offsetY, offsetX };
