@@ -8,7 +8,10 @@ import {
 
 const STEP_DURATION = 200;
 
-export const usePlayerOrientation = (isPressed: ArrowType | false) => {
+export const usePlayerOrientation = (
+  isPressed: ArrowType | false,
+  playerCurrentInteraction: string | null,
+) => {
   const [currentFramePath, setCurrentFramePath] = useState<number>(
     IMAGES_PATHS.up.standby,
   );
@@ -37,7 +40,7 @@ export const usePlayerOrientation = (isPressed: ArrowType | false) => {
   };
 
   useEffect(() => {
-    if (isPressed) {
+    if (isPressed && !playerCurrentInteraction) {
       isPressedPreviousValue.current = isPressed;
       const clearAnimation = animatePlayerWithDirection(isPressed);
 

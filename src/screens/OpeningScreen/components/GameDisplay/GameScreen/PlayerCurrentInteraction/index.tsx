@@ -1,25 +1,21 @@
 import React, { memo } from 'react';
 
-import { GAME_DISPLAY_HEIGHT, WINDOW_WIDTH } from '../..';
-import { ResizableMenu } from '../ResizableMenu';
-
-const pcMenuHeight = GAME_DISPLAY_HEIGHT;
-const pcMenuHorizontalOffset = WINDOW_WIDTH / 2;
+import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { PcInteraction } from './PcInteraction';
 
 interface PlayerCurrentInteractionProps {
   playerCurrentInteraction: string | null;
+  isPressed: ArrowType | false;
 }
 
 const PlayerCurrentInteractionComponent = ({
   playerCurrentInteraction,
+  isPressed,
 }: PlayerCurrentInteractionProps) => {
   return (
     <>
       {playerCurrentInteraction === 'APC' && (
-        <ResizableMenu
-          menuHeight={pcMenuHeight}
-          menuHorizontalOffset={pcMenuHorizontalOffset}
-        />
+        <PcInteraction isPressed={isPressed} />
       )}
     </>
   );

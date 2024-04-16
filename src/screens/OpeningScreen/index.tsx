@@ -15,6 +15,10 @@ import { useGameStateManager } from './components/GameDisplay/useGameStateManage
 const OpeningScreenComponent = () => {
   const { gameState, redirectToGameScreen } = useGameStateManager();
   const { isPressed, panResponder } = useDirectionalCross();
+  const {
+    isPressed: isPressedInteraction,
+    panResponder: panResponderInteraction,
+  } = useDirectionalCross();
   const { offsetY, offsetX } = useLobbyRoom(isPressed);
 
   const { currentTileYArrayCoordinate, currentTileXArrayCoordinate } =
@@ -45,14 +49,16 @@ const OpeningScreenComponent = () => {
     <View style={styles.gameAndControlsContainer}>
       <GameDisplay
         gameState={gameState}
-        isPressed={isPressed}
+        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
         offsetY={offsetY}
         offsetX={offsetX}
         playerCurrentInteraction={playerCurrentInteraction}
       />
       <GameControls
-        panResponder={panResponder}
-        isPressed={isPressed}
+        panResponder={
+          !playerCurrentInteraction ? panResponder : panResponderInteraction
+        }
+        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
         redirectToGameScreen={redirectToGameScreen}
         handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
       />

@@ -11,11 +11,11 @@ export interface LobbyRoomProps {
   offsetX: number;
 }
 
-interface PlayerProps {
+export interface PlayerProps {
   isPressed: ArrowType | false;
 }
 
-interface PlayerInteractionProps {
+export interface PlayerInteractionProps {
   playerCurrentInteraction: string | null;
 }
 
@@ -30,10 +30,14 @@ const GameScreenComponent = ({
   return (
     <View style={styles.container}>
       <LobbyRoom offsetY={offsetY} offsetX={offsetX} />
-      <Player isPressed={isPressed} />
+      <Player
+        isPressed={isPressed}
+        playerCurrentInteraction={playerCurrentInteraction}
+      />
       {playerCurrentInteraction && (
         <PlayerCurrentInteraction
           playerCurrentInteraction={playerCurrentInteraction}
+          isPressed={isPressed}
         />
       )}
     </View>
