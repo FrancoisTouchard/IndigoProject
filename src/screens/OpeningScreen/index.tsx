@@ -28,11 +28,12 @@ const OpeningScreenComponent = () => {
     currentTileYArrayCoordinate,
     currentTileXArrayCoordinate,
   );
-  const { handlePlayerCurrentInteraction } = usePlayerCurrentInteraction(
-    currentTileAllocation,
-    isPressed,
-    isPressedPreviousValue,
-  );
+  const { playerCurrentInteraction, handlePlayerCurrentInteraction } =
+    usePlayerCurrentInteraction(
+      currentTileAllocation,
+      isPressed,
+      isPressedPreviousValue,
+    );
 
   useEffect(() => {
     if (isPressed) {
@@ -47,6 +48,7 @@ const OpeningScreenComponent = () => {
         isPressed={isPressed}
         offsetY={offsetY}
         offsetX={offsetX}
+        playerCurrentInteraction={playerCurrentInteraction}
       />
       <GameControls
         panResponder={panResponder}

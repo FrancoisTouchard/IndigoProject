@@ -17,13 +17,19 @@ const GameDisplayComponent = ({
   isPressed,
   offsetY,
   offsetX,
+  playerCurrentInteraction,
 }: GameDisplayComponentProps) => {
   return (
     <View style={styles.gameDisplayContainer}>
       {gameState === 'AnimationOpening' ? (
         <AnimationOpening />
       ) : (
-        <GameScreen isPressed={isPressed} offsetY={offsetY} offsetX={offsetX} />
+        <GameScreen
+          isPressed={isPressed}
+          offsetY={offsetY}
+          offsetX={offsetX}
+          playerCurrentInteraction={playerCurrentInteraction}
+        />
       )}
     </View>
   );

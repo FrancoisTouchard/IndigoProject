@@ -6,4 +6,5 @@ export interface GameDisplayComponentProps {
   isPressed: ArrowType | false;
   offsetY: number;
   offsetX: number;
+  playerCurrentInteraction: string | null;
 }
