@@ -23,6 +23,13 @@ export const usePreloadImages = (redirectToNextScreen: () => void) => {
       require('../../../../../../assets/Player/RedGoingDown2.png'),
       require('../../../../../../assets/Player/RedGoingUp1.png'),
       require('../../../../../../assets/Player/RedGoingUp2.png'),
+      // Menu
+      require('../../../../../../assets/ResizableMenu/MenuTopLeftCorner.png'),
+      require('../../../../../../assets/ResizableMenu/MenuTopRightCorner.png'),
+      require('../../../../../../assets/ResizableMenu/MenuBottomRightCorner.png'),
+      require('../../../../../../assets/ResizableMenu/MenuBottomLeftCorner.png'),
+      require('../../../../../../assets/ResizableMenu/MenuVerticalBorder.png'),
+      require('../../../../../../assets/ResizableMenu/MenuHorizontalBorder.png'),
     ];
 
     const uris = images.map(image => {
