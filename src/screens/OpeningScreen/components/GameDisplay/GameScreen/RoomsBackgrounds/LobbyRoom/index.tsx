@@ -7,8 +7,12 @@ import {
   TILE_SIZE,
   VERTICAL_TILE_COUNT,
 } from '../../..';
-import { LobbyRoomProps } from '../..';
 import { PlayerPositionIndicator } from '../../PlayerPositionIndicator';
+
+interface LobbyRoomProps {
+  offsetY: number;
+  offsetX: number;
+}
 
 const LobbyRoomComponent = ({ offsetY, offsetX }: LobbyRoomProps) => {
   return (

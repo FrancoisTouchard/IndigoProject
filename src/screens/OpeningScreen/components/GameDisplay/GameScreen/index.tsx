@@ -2,31 +2,28 @@ import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ArrowType } from '../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { GameStatesTypes } from '../useGameStateManager';
 import { Player } from './Player';
 import { PlayerCurrentInteraction } from './PlayerCurrentInteraction';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
 
-export interface LobbyRoomProps {
+interface GameScreenProps {
+  isPressed: ArrowType | false;
   offsetY: number;
   offsetX: number;
-}
-
-export interface PlayerProps {
-  isPressed: ArrowType | false;
-}
-
-export interface PlayerInteractionProps {
   playerCurrentInteraction: string | null;
+  gameState: GameStatesTypes;
 }
-
-type GameScreenProps = LobbyRoomProps & PlayerProps & PlayerInteractionProps;
 
 const GameScreenComponent = ({
   isPressed,
   offsetY,
   offsetX,
   playerCurrentInteraction,
+  gameState,
 }: GameScreenProps) => {
+  if (gameState !== 'GameScreen') return null;
+
   return (
     <View style={styles.container}>
       <LobbyRoom offsetY={offsetY} offsetX={offsetX} />
