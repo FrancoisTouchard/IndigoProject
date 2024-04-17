@@ -12,13 +12,9 @@ const PlayerCurrentInteractionComponent = ({
   playerCurrentInteraction,
   isPressed,
 }: PlayerCurrentInteractionProps) => {
-  return (
-    <>
-      {playerCurrentInteraction === 'APC' && (
-        <PcInteraction isPressed={isPressed} />
-      )}
-    </>
-  );
+  if (playerCurrentInteraction !== 'APC') return null;
+
+  return <PcInteraction isPressed={isPressed} />;
 };
 
 export const PlayerCurrentInteraction = memo(PlayerCurrentInteractionComponent);

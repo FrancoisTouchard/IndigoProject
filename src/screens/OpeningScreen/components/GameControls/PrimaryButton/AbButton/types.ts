@@ -1,4 +1,3 @@
-export interface AbButtonProps {
+export type AbButtonProps = {
   buttonType: 'A' | 'B';
-  handlePlayerCurrentInteraction?: () => void;
-}
+};

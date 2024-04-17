@@ -32,12 +32,15 @@ const OpeningScreenComponent = () => {
     currentTileYArrayCoordinate,
     currentTileXArrayCoordinate,
   );
-  const { playerCurrentInteraction, handlePlayerCurrentInteraction } =
-    usePlayerCurrentInteraction(
-      currentTileAllocation,
-      isPressed,
-      isPressedPreviousValue,
-    );
+  const {
+    playerCurrentInteraction,
+    handlePlayerCurrentInteraction,
+    closeCurrentInteraction,
+  } = usePlayerCurrentInteraction(
+    currentTileAllocation,
+    isPressed,
+    isPressedPreviousValue,
+  );
 
   useEffect(() => {
     if (isPressed) {
@@ -61,6 +64,7 @@ const OpeningScreenComponent = () => {
         isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
         redirectToGameScreen={redirectToGameScreen}
         handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
+        closeCurrentInteraction={closeCurrentInteraction}
       />
     </View>
   );

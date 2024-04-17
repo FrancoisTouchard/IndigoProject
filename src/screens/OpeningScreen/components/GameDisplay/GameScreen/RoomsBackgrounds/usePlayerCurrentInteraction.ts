@@ -11,31 +11,39 @@ export const usePlayerCurrentInteraction = (
     string | null
   >(null);
 
+  const closeCurrentInteraction = () => {
+    setPlayerCurrentInteraction(null);
+  };
+
   const handlePlayerCurrentInteraction = () => {
     switch (currentTileAllocation) {
       case 'APKC':
-        if (isPressed === false && isPressedPreviousValue.current === 'up')
+        if (isPressed === false && isPressedPreviousValue.current === 'up') {
           console.log('Welcome to the PokéCenter !');
-        setPlayerCurrentInteraction('APKC');
+          setPlayerCurrentInteraction('APKC');
+        }
         break;
 
       case 'APC':
-        if (isPressed === false && isPressedPreviousValue.current === 'up')
+        if (isPressed === false && isPressedPreviousValue.current === 'up') {
           console.log('PC is booting');
-        setPlayerCurrentInteraction('APC');
+          setPlayerCurrentInteraction('APC');
+        }
         break;
 
       case 'APS':
-        if (isPressed === false && isPressedPreviousValue.current === 'left')
+        if (isPressed === false && isPressedPreviousValue.current === 'left') {
           console.log('Welcome to the shop !');
-        setPlayerCurrentInteraction('APS');
+          setPlayerCurrentInteraction('APS');
+        }
 
         break;
 
       case 'EX':
-        if (isPressed === false && isPressedPreviousValue.current === 'up')
+        if (isPressed === false && isPressedPreviousValue.current === 'up') {
           console.log('You have no Pokémon !');
-        setPlayerCurrentInteraction('EX');
+          setPlayerCurrentInteraction('EX');
+        }
         break;
 
       case 'O':
@@ -47,5 +55,9 @@ export const usePlayerCurrentInteraction = (
     }
   };
 
-  return { playerCurrentInteraction, handlePlayerCurrentInteraction };
+  return {
+    playerCurrentInteraction,
+    handlePlayerCurrentInteraction,
+    closeCurrentInteraction,
+  };
 };

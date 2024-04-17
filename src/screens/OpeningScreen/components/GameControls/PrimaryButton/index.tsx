@@ -1,17 +1,43 @@
+/* eslint-disable prettier/prettier */
 import React, { memo } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { AbButton } from './AbButton';
-import { AbButtonProps } from './AbButton/types';
+
+type PrimaryButtonType = {
+  buttonType: 'A' | 'B';
+};
+
+export type ABButtonConditionalProps =
+  | {
+    handlePlayerCurrentInteraction?: () => void;
+    closeCurrentInteraction?: never;
+  }
+  | {
+    closeCurrentInteraction?: () => void;
+    handlePlayerCurrentInteraction?: never;
+  };
+
+type NewProps = PrimaryButtonType & ABButtonConditionalProps;
 
 const PrimaryButtonComponent = ({
   buttonType,
   handlePlayerCurrentInteraction,
-}: AbButtonProps) => {
+  closeCurrentInteraction,
+}: NewProps) => {
+  const onPrimaryButtonPress = () => {
+    if (buttonType === 'A' && handlePlayerCurrentInteraction) {
+      handlePlayerCurrentInteraction();
+    }
+    if (buttonType === 'B' && closeCurrentInteraction) {
+      closeCurrentInteraction();
+    }
+  };
+
   return (
     <View style={styles.abButtonContainer}>
       <TouchableOpacity
-        onPress={handlePlayerCurrentInteraction}
+        onPress={onPrimaryButtonPress}
         style={styles.singleButtonContainer}
         accessibilityRole="button">
         <AbButton buttonType={buttonType} />
