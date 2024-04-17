@@ -4,8 +4,9 @@ import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/Dir
 import { GAME_DISPLAY_HEIGHT, WINDOW_WIDTH } from '../../..';
 import { ResizableMenu } from '../../ResizableMenu';
 
-const pcMenuHeight = GAME_DISPLAY_HEIGHT;
+const pcMenuHeight = GAME_DISPLAY_HEIGHT * 0.37;
 const pcMenuHorizontalOffset = WINDOW_WIDTH / 2;
+const pcMenuItems = ['POKéDEX', 'POKéMON', 'EXIT'];
 
 interface PcInteractionProps {
   isPressed: ArrowType | false;
@@ -16,6 +17,8 @@ const PcInteractionComponent = ({ isPressed }: PcInteractionProps) => {
     <ResizableMenu
       menuHeight={pcMenuHeight}
       menuHorizontalOffset={pcMenuHorizontalOffset}
+      isPressed={isPressed}
+      menuItems={pcMenuItems}
     />
   );
 };

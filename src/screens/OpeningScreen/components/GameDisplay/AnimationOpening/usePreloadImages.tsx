@@ -30,6 +30,7 @@ export const usePreloadImages = (redirectToNextScreen: () => void) => {
       require('../../../../../../assets/ResizableMenu/MenuBottomLeftCorner.png'),
       require('../../../../../../assets/ResizableMenu/MenuVerticalBorder.png'),
       require('../../../../../../assets/ResizableMenu/MenuHorizontalBorder.png'),
+      require('../../../../../../assets/ResizableMenu/ListSelector.png'),
     ];
 
     const uris = images.map(image => {

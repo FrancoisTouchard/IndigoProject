@@ -1,105 +1,99 @@
-import React, { memo } from 'react';
-import { Image, View } from 'react-native';
+import React, { memo, useEffect, useState } from 'react';
+import { Image, Text, View } from 'react-native';
 
-import { white } from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
+import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { ListSelector } from './ListSelector';
+import { styles } from './styles';
 
 interface ResizableMenuProps {
   menuHeight: number;
   menuHorizontalOffset: number;
+  isPressed: ArrowType | false;
+  menuItems: string[];
 }
 
 const ResizableMenuComponent = ({
   menuHeight,
   menuHorizontalOffset,
+  isPressed,
+  menuItems,
 }: ResizableMenuProps) => {
+  const [selectedItem, setSelectedItem] = useState<number>(0);
+
+  const navigateMenu = (selectorValue: ArrowType | false) => {
+    if (selectorValue === 'up') {
+      setSelectedItem(prevIndex =>
+        prevIndex === 0 ? menuItems.length - 1 : prevIndex - 1,
+      );
+    } else if (selectorValue === 'down') {
+      setSelectedItem(prevIndex =>
+        prevIndex === menuItems.length - 1 ? 0 : prevIndex + 1,
+      );
+    }
+  };
+
+  useEffect(() => {
+    navigateMenu(isPressed);
+  }, [isPressed]);
+
   return (
     <View
-      style={{
-        marginLeft: menuHorizontalOffset,
-        height: menuHeight,
-        position: 'relative',
-      }}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+      style={[
+        styles.menuContainer,
+        { height: menuHeight, marginLeft: menuHorizontalOffset },
+      ]}>
+      <View style={styles.topAndBottomLineContainer}>
+        <View style={styles.lineContainer}>
           <Image
-            style={{
-              width: 20,
-              height: 20,
-              zIndex: 1,
-            }}
+            style={styles.topLeftCorner}
             source={require('../../../../../../../assets/ResizableMenu/MenuTopLeftCorner.png')}
           />
           <Image
-            style={{
-              width: '100%',
-              height: 20,
-              position: 'absolute',
-              top: 0,
-            }}
+            style={styles.horizontalBorder}
             source={require('../../../../../../../assets/ResizableMenu/MenuHorizontalBorder.png')}
             resizeMode="stretch"
           />
           <Image
-            style={{
-              width: 20,
-              height: 20,
-              position: 'absolute',
-              top: 0,
-              right: 0,
-            }}
+            style={styles.topRightCorner}
             source={require('../../../../../../../assets/ResizableMenu/MenuTopRightCorner.png')}
           />
         </View>
       </View>
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={styles.middleLineContainer}>
+        <View style={styles.lineContainer}>
+          <Image
+            style={styles.leftVerticalBorder}
+            source={require('../../../../../../../assets/ResizableMenu/MenuVerticalBorder.png')}
+            resizeMode="stretch"
+          />
+          <View style={styles.menuItemsContainer}>
+            {menuItems.map((item, index) => (
+              <View key={index} style={styles.menuItemContainer}>
+                <Text style={styles.menuText}>{item}</Text>
+                {index === selectedItem && <ListSelector />}
+              </View>
+            ))}
+          </View>
+        </View>
         <Image
-          style={{
-            width: 20,
-            height: '100%',
-            transform: [{ rotate: '180deg' }],
-          }}
-          source={require('../../../../../../../assets/ResizableMenu/MenuVerticalBorder.png')}
-          resizeMode="stretch"
-        />
-        <View style={{ flex: 1, backgroundColor: white }} />
-        <Image
-          style={{
-            width: 20,
-            height: '100%',
-          }}
+          style={styles.rightVerticalBorder}
           source={require('../../../../../../../assets/ResizableMenu/MenuVerticalBorder.png')}
           resizeMode="stretch"
         />
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={styles.topAndBottomLineContainer}>
+        <View style={styles.lineContainer}>
           <Image
-            style={{
-              width: 20,
-              height: 20,
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              zIndex: 1,
-            }}
+            style={styles.bottomLeftCorner}
             source={require('../../../../../../../assets/ResizableMenu/MenuBottomLeftCorner.png')}
           />
           <Image
-            style={{
-              width: '100%',
-              height: 20,
-            }}
+            style={styles.horizontalBorder}
             source={require('../../../../../../../assets/ResizableMenu/MenuHorizontalBorder.png')}
             resizeMode="stretch"
           />
           <Image
-            style={{
-              width: 20,
-              height: 20,
-              position: 'absolute',
-              bottom: 0,
-              right: 0,
-            }}
+            style={styles.bottomRightCorner}
             source={require('../../../../../../../assets/ResizableMenu/MenuBottomRightCorner.png')}
           />
         </View>
