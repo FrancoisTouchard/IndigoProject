@@ -7,24 +7,32 @@ import { ArrowType } from './DirectionalCross/DirectionalArrow/types';
 import { PrimaryButton } from './PrimaryButton/index';
 import { SecondaryButton } from './SecondaryButton/index';
 
-export interface GameControlComponentProps {
-  redirectToGameScreen: () => void;
-  panResponder: PanResponderInstance;
-  isPressed: false | ArrowType;
-}
-
 const GameControlsComponent = ({
   redirectToGameScreen,
   panResponder,
   isPressed,
-}: GameControlComponentProps) => {
+  handlePlayerCurrentInteraction,
+  closeCurrentInteraction,
+}: {
+  redirectToGameScreen: () => void;
+  panResponder: PanResponderInstance;
+  isPressed: false | ArrowType;
+  handlePlayerCurrentInteraction: () => void;
+  closeCurrentInteraction: () => void;
+}) => {
   return (
     <View style={styles.controlsContainer}>
       <View style={styles.primaryControlsContainer}>
         <DirectionalCross panResponder={panResponder} isPressed={isPressed} />
         <View style={styles.abButtonsContainer}>
-          <PrimaryButton buttonType={'B'} />
-          <PrimaryButton buttonType={'A'} />
+          <PrimaryButton
+            buttonType={'B'}
+            closeCurrentInteraction={closeCurrentInteraction}
+          />
+          <PrimaryButton
+            buttonType={'A'}
+            handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
+          />
         </View>
       </View>
       <View style={styles.secondaryControlsContainer}>
@@ -51,8 +59,6 @@ const styles = StyleSheet.create({
   abButtonsContainer: {
     flex: 1,
     height: '50%',
-    marginTop: '20%',
-    marginBottom: '10%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',

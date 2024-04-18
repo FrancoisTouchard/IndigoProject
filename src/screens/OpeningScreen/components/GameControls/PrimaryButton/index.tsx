@@ -1,13 +1,41 @@
 import React, { memo } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { AbButton } from './AbButton';
-import { AbButtonProps } from './AbButton/types';
 
-const PrimaryButtonComponent = ({ buttonType }: AbButtonProps) => {
+export type PrimaryButtonType = {
+  buttonType: 'A' | 'B';
+};
+
+export interface ABButtonProps {
+  handlePlayerCurrentInteraction?: () => void;
+  closeCurrentInteraction?: () => void;
+}
+
+type PrimaryButtonProps = PrimaryButtonType & ABButtonProps;
+
+const PrimaryButtonComponent = ({
+  buttonType,
+  handlePlayerCurrentInteraction,
+  closeCurrentInteraction,
+}: PrimaryButtonProps) => {
+  const onPrimaryButtonPress = () => {
+    if (buttonType === 'A' && handlePlayerCurrentInteraction) {
+      handlePlayerCurrentInteraction();
+    }
+    if (buttonType === 'B' && closeCurrentInteraction) {
+      closeCurrentInteraction();
+    }
+  };
+
   return (
     <View style={styles.abButtonContainer}>
-      <AbButton buttonType={buttonType} />
+      <TouchableOpacity
+        onPress={onPrimaryButtonPress}
+        style={styles.singleButtonContainer}
+        accessibilityRole="button">
+        <AbButton buttonType={buttonType} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -16,8 +44,9 @@ const styles = StyleSheet.create({
   abButtonContainer: {
     width: '25%',
     height: '25%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  singleButtonContainer: {
+    flex: 1,
   },
 });
 

@@ -2,9 +2,7 @@ import React, { memo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { white } from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
-import { COLLISION_OVERLAP_IN_PIXELS } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
-import { findTileAllocation } from '../RoomsBackgrounds/tileAllocationHelpers';
-import { findPlayerPositionWithOffset } from '../RoomsBackgrounds/tileMapHelpers';
+import { getPlayerPosition } from './playerPositionHelpers';
 
 const PlayerPositionIndicatorComponent = ({
   offsetY,
@@ -13,16 +11,11 @@ const PlayerPositionIndicatorComponent = ({
   offsetY: number;
   offsetX: number;
 }) => {
-  const { currentTileYArrayCoordinate, currentTileXArrayCoordinate } =
-    findPlayerPositionWithOffset(
-      offsetY + COLLISION_OVERLAP_IN_PIXELS,
-      offsetX - COLLISION_OVERLAP_IN_PIXELS,
-    );
-
-  const currentTileAllocation = findTileAllocation(
+  const {
     currentTileYArrayCoordinate,
     currentTileXArrayCoordinate,
-  );
+    currentTileAllocation,
+  } = getPlayerPosition(offsetY, offsetX);
 
   return (
     <View style={styles.container}>

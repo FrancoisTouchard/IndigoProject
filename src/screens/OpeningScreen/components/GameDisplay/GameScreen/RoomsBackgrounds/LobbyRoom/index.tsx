@@ -7,13 +7,14 @@ import {
   TILE_SIZE,
   VERTICAL_TILE_COUNT,
 } from '../../..';
-import { GameScreenTypes } from '../..';
 import { PlayerPositionIndicator } from '../../PlayerPositionIndicator';
-import { useLobbyRoom } from './useLobbyRoom';
 
-const LobbyRoomComponent = ({ isPressed }: GameScreenTypes) => {
-  const { offsetY, offsetX } = useLobbyRoom(isPressed);
+interface LobbyRoomProps {
+  offsetY: number;
+  offsetX: number;
+}
 
+const LobbyRoomComponent = ({ offsetY, offsetX }: LobbyRoomProps) => {
   return (
     <>
       <FastImage

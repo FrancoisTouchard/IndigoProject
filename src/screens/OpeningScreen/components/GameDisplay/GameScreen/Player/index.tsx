@@ -2,13 +2,19 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
+import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
 import { GAME_DISPLAY_HEIGHT, TILE_SIZE, WINDOW_WIDTH } from '../..';
-import { GameScreenTypes } from '../';
+import { GameState } from '../../useGameStateManager';
 import { TILE_SIZE_HALVED } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
 import { usePlayerOrientation } from './usePlayerOrientation';
 
-const PlayerComponent = ({ isPressed }: GameScreenTypes) => {
-  const { currentFramePath } = usePlayerOrientation(isPressed);
+interface PlayerProps {
+  isPressed: ArrowType | false;
+  gameState: GameState;
+}
+
+const PlayerComponent = ({ isPressed, gameState }: PlayerProps) => {
+  const { currentFramePath } = usePlayerOrientation(isPressed, gameState);
 
   return (
     <FastImage

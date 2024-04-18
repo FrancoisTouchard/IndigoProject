@@ -2,7 +2,13 @@ import React, { memo, useEffect, useRef } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const AnimationOpeningComponent = () => {
+import { GameState } from '../useGameStateManager';
+
+interface AnimationOpeningProps {
+  gameState: GameState;
+}
+
+const AnimationOpeningComponent = ({ gameState }: AnimationOpeningProps) => {
   const opacityFirstImage = useRef(new Animated.Value(0)).current;
   const opacitySecondImage = useRef(new Animated.Value(0)).current;
   const opacityThirdImage = useRef(new Animated.Value(0)).current;
@@ -40,6 +46,8 @@ const AnimationOpeningComponent = () => {
   useEffect(() => {
     launchAnimation();
   }, []);
+
+  if (gameState.name !== 'AnimationOpening') return null;
 
   return (
     <>
