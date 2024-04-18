@@ -3,7 +3,9 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "paths": {},
+    "paths": {
+      "src": ["./src"],
+    },
     "esModuleInterop": true,
     "isolatedModules": false,
     "jsx": "react",
