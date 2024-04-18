@@ -98,7 +98,7 @@ export const useLobbyRoom = (isPressed: ArrowType | false) => {
 
   useEffect(() => {
     clearInterval(intervalRef.current as NodeJS.Timeout);
-    locateAndMovePlayer();
+    if (isPressed) locateAndMovePlayer();
   }, [isPressed, locateAndMovePlayer]);
 
   return { offsetY, offsetX };
