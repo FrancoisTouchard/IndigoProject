@@ -4,50 +4,52 @@ import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArr
 
 export const usePlayerCurrentInteraction = (
   currentTileAllocation: string,
-  isPressed: ArrowType | false,
   isPressedPreviousValue: React.MutableRefObject<false | ArrowType>,
+  togglePauseState: () => void,
 ) => {
   const [playerCurrentInteraction, setPlayerCurrentInteraction] = useState<
     string | null
   >(null);
 
+  const setCurrentInteractionWithPauseState = () => {
+    setPlayerCurrentInteraction(currentTileAllocation);
+    togglePauseState();
+  };
+
   const closeCurrentInteraction = () => {
     setPlayerCurrentInteraction(null);
+    togglePauseState();
   };
 
   const handlePlayerCurrentInteraction = () => {
     switch (currentTileAllocation) {
       case 'APKC':
-        if (isPressed === false && isPressedPreviousValue.current === 'up') {
+        if (isPressedPreviousValue.current === 'up') {
           console.log('Welcome to the PokéCenter !');
-          setPlayerCurrentInteraction('APKC');
+          setCurrentInteractionWithPauseState();
         }
         break;
 
       case 'APC':
-        if (isPressed === false && isPressedPreviousValue.current === 'up') {
+        if (isPressedPreviousValue.current === 'up') {
           console.log('PC is booting');
-          setPlayerCurrentInteraction('APC');
+          setCurrentInteractionWithPauseState();
         }
         break;
 
       case 'APS':
-        if (isPressed === false && isPressedPreviousValue.current === 'left') {
+        if (isPressedPreviousValue.current === 'left') {
           console.log('Welcome to the shop !');
-          setPlayerCurrentInteraction('APS');
+          setCurrentInteractionWithPauseState();
         }
 
         break;
 
       case 'EX':
-        if (isPressed === false && isPressedPreviousValue.current === 'up') {
+        if (isPressedPreviousValue.current === 'up') {
           console.log('You have no Pokémon !');
-          setPlayerCurrentInteraction('EX');
+          setCurrentInteractionWithPauseState();
         }
-        break;
-
-      case 'O':
-        setPlayerCurrentInteraction(null);
         break;
 
       default:

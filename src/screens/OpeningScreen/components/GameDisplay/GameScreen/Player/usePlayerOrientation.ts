@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { GameState } from '../../useGameStateManager';
 import {
   getPathConfigFromDirection,
   IMAGES_PATHS,
@@ -10,7 +11,7 @@ const STEP_DURATION = 200;
 
 export const usePlayerOrientation = (
   isPressed: ArrowType | false,
-  playerCurrentInteraction: string | null,
+  gameState: GameState,
 ) => {
   const [currentFramePath, setCurrentFramePath] = useState<number>(
     IMAGES_PATHS.up.standby,
@@ -40,7 +41,7 @@ export const usePlayerOrientation = (
   };
 
   useEffect(() => {
-    if (isPressed && !playerCurrentInteraction) {
+    if (isPressed && !gameState.isPaused) {
       isPressedPreviousValue.current = isPressed;
       const clearAnimation = animatePlayerWithDirection(isPressed);
 
@@ -55,7 +56,7 @@ export const usePlayerOrientation = (
 
       return;
     }
-  }, [isPressed]);
+  }, [isPressed, gameState.isPaused]);
 
   return { currentFramePath };
 };

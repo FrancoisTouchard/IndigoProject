@@ -10,7 +10,8 @@ import { usePlayerCurrentInteraction } from './components/GameDisplay/GameScreen
 import { useGameStateManager } from './components/GameDisplay/useGameStateManager';
 
 const OpeningScreenComponent = () => {
-  const { gameState, redirectToGameScreen } = useGameStateManager();
+  const { gameState, redirectToGameScreen, togglePauseState } =
+    useGameStateManager();
   const { isPressed, panResponder, isPressedPreviousValue } =
     useDirectionalCross();
   const {
@@ -25,8 +26,8 @@ const OpeningScreenComponent = () => {
     closeCurrentInteraction,
   } = usePlayerCurrentInteraction(
     currentTileAllocation,
-    isPressed,
     isPressedPreviousValue,
+    togglePauseState,
   );
 
   return (

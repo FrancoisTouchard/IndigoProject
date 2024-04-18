@@ -1,30 +1,24 @@
-/* eslint-disable prettier/prettier */
 import React, { memo } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { AbButton } from './AbButton';
 
-type PrimaryButtonType = {
+export type PrimaryButtonType = {
   buttonType: 'A' | 'B';
 };
 
-export type ABButtonConditionalProps =
-  | {
-    handlePlayerCurrentInteraction?: () => void;
-    closeCurrentInteraction?: never;
-  }
-  | {
-    closeCurrentInteraction?: () => void;
-    handlePlayerCurrentInteraction?: never;
-  };
+export interface ABButtonProps {
+  handlePlayerCurrentInteraction?: () => void;
+  closeCurrentInteraction?: () => void;
+}
 
-type NewProps = PrimaryButtonType & ABButtonConditionalProps;
+type PrimaryButtonProps = PrimaryButtonType & ABButtonProps;
 
 const PrimaryButtonComponent = ({
   buttonType,
   handlePlayerCurrentInteraction,
   closeCurrentInteraction,
-}: NewProps) => {
+}: PrimaryButtonProps) => {
   const onPrimaryButtonPress = () => {
     if (buttonType === 'A' && handlePlayerCurrentInteraction) {
       handlePlayerCurrentInteraction();
@@ -50,14 +44,9 @@ const styles = StyleSheet.create({
   abButtonContainer: {
     width: '25%',
     height: '25%',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   singleButtonContainer: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
   },
 });
 

@@ -2,10 +2,10 @@ import React, { memo, useEffect, useRef } from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-import { GameStatesTypes } from '../useGameStateManager';
+import { GameState } from '../useGameStateManager';
 
 interface AnimationOpeningProps {
-  gameState: GameStatesTypes;
+  gameState: GameState;
 }
 
 const AnimationOpeningComponent = ({ gameState }: AnimationOpeningProps) => {
@@ -47,7 +47,7 @@ const AnimationOpeningComponent = ({ gameState }: AnimationOpeningProps) => {
     launchAnimation();
   }, []);
 
-  if (gameState !== 'AnimationOpening') return null;
+  if (gameState.name !== 'AnimationOpening') return null;
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ArrowType } from '../../GameControls/DirectionalCross/DirectionalArrow/types';
-import { GameStatesTypes } from '../useGameStateManager';
+import { GameState } from '../useGameStateManager';
 import { Player } from './Player';
 import { PlayerCurrentInteraction } from './PlayerCurrentInteraction';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
@@ -12,7 +12,7 @@ interface GameScreenProps {
   offsetY: number;
   offsetX: number;
   playerCurrentInteraction: string | null;
-  gameState: GameStatesTypes;
+  gameState: GameState;
 }
 
 const GameScreenComponent = ({
@@ -22,15 +22,12 @@ const GameScreenComponent = ({
   playerCurrentInteraction,
   gameState,
 }: GameScreenProps) => {
-  if (gameState !== 'GameScreen') return null;
+  if (gameState.name !== 'GameScreen') return null;
 
   return (
     <View style={styles.container}>
       <LobbyRoom offsetY={offsetY} offsetX={offsetX} />
-      <Player
-        isPressed={isPressed}
-        playerCurrentInteraction={playerCurrentInteraction}
-      />
+      <Player isPressed={isPressed} gameState={gameState} />
       <PlayerCurrentInteraction
         playerCurrentInteraction={playerCurrentInteraction}
         isPressed={isPressed}

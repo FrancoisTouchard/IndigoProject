@@ -1,17 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-import {
-  black,
-  white,
-} from '../../../../../../../assets/AnimationOpening/stylesColorsCode';
+import { white } from '../../../assets/AnimationOpening/stylesColorsCode';
 
-const borderSize = 20;
-const menuItemsLeftOffset = 22;
-const menuItemsVerticalSpacing = 3;
+export const BORDER_SIZE = 12;
 
 export const styles = StyleSheet.create({
   menuContainer: {
     position: 'relative',
+    flex: 1,
   },
   topAndBottomLineContainer: {
     flexDirection: 'row',
@@ -26,57 +22,43 @@ export const styles = StyleSheet.create({
     backgroundColor: white,
   },
   topLeftCorner: {
-    width: borderSize,
-    height: borderSize,
+    width: BORDER_SIZE,
+    height: BORDER_SIZE,
     zIndex: 1,
   },
   horizontalBorder: {
     width: '100%',
-    height: borderSize,
+    height: BORDER_SIZE,
   },
   topRightCorner: {
-    width: borderSize,
-    height: borderSize,
+    width: BORDER_SIZE,
+    height: BORDER_SIZE,
     position: 'absolute',
     top: 0,
     right: 0,
   },
   rightVerticalBorder: {
-    width: borderSize,
+    width: BORDER_SIZE,
     height: '100%',
   },
   leftVerticalBorder: {
-    width: borderSize,
+    width: BORDER_SIZE,
     height: '100%',
     transform: [{ rotate: '180deg' }],
   },
   bottomRightCorner: {
-    width: borderSize,
-    height: borderSize,
+    width: BORDER_SIZE,
+    height: BORDER_SIZE,
     position: 'absolute',
     bottom: 0,
     right: 0,
   },
   bottomLeftCorner: {
-    width: borderSize,
-    height: borderSize,
+    width: BORDER_SIZE,
+    height: BORDER_SIZE,
     position: 'absolute',
     bottom: 0,
     left: 0,
     zIndex: 1,
-  },
-  menuItemsContainer: {
-    flex: 1,
-    marginLeft: menuItemsLeftOffset,
-  },
-  menuItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  menuText: {
-    fontFamily: 'PokemonClassic',
-    fontSize: 14,
-    color: black,
-    marginBottom: menuItemsVerticalSpacing,
   },
 });

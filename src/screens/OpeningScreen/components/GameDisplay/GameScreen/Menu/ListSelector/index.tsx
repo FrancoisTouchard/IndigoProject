@@ -2,8 +2,9 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-const listSelectorHorizontalOffset = -20;
-const listSelectorDimensions = 14;
+import { MENU_ITEMS_LEFT_OFFSET } from '..';
+
+const LIST_SELECTOR_DIMENSIONS = 10;
 
 const ListSelectorComponent = () => {
   return (
@@ -17,10 +18,10 @@ const ListSelectorComponent = () => {
 
 const styles = StyleSheet.create({
   listSelector: {
-    height: listSelectorDimensions,
-    width: listSelectorDimensions,
+    height: LIST_SELECTOR_DIMENSIONS,
+    width: LIST_SELECTOR_DIMENSIONS,
     position: 'absolute',
-    left: listSelectorHorizontalOffset,
+    left: -MENU_ITEMS_LEFT_OFFSET + LIST_SELECTOR_DIMENSIONS / 2,
   },
 });
 
