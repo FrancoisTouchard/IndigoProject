@@ -1,19 +1,23 @@
 import { useState } from 'react';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { GameState } from '../../useGameStateManager';
 
 export const usePlayerCurrentInteraction = (
   currentTileAllocation: string,
   isPressedPreviousValue: React.MutableRefObject<false | ArrowType>,
   togglePauseState: () => void,
+  gameState: GameState,
 ) => {
   const [playerCurrentInteraction, setPlayerCurrentInteraction] = useState<
     string | null
   >(null);
 
   const setCurrentInteractionWithPauseState = () => {
-    setPlayerCurrentInteraction(currentTileAllocation);
-    togglePauseState();
+    if (!gameState.isPaused) {
+      setPlayerCurrentInteraction(currentTileAllocation);
+      togglePauseState();
+    }
   };
 
   const closeCurrentInteraction = () => {

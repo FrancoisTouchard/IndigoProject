@@ -28,6 +28,7 @@ const OpeningScreenComponent = () => {
     currentTileAllocation,
     isPressedPreviousValue,
     togglePauseState,
+    gameState,
   );
 
   return (
