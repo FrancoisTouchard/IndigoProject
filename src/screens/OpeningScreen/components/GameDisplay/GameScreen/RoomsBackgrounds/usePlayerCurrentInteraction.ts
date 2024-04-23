@@ -8,10 +8,12 @@ export const usePlayerCurrentInteraction = (
   isPressedPreviousValue: React.MutableRefObject<false | ArrowType>,
   togglePauseState: () => void,
   gameState: GameState,
+  selectedMenuItem: number,
 ) => {
   const [playerCurrentInteraction, setPlayerCurrentInteraction] = useState<
     string | null
   >(null);
+  const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
 
   const setCurrentInteractionWithPauseState = () => {
     if (!gameState.isPaused) {
@@ -21,8 +23,18 @@ export const usePlayerCurrentInteraction = (
   };
 
   const closeCurrentInteraction = () => {
-    setPlayerCurrentInteraction(null);
-    togglePauseState();
+    if (playerCurrentInteraction === 'APC' && clickedMenuItem === 'POKéDEX') {
+      closePcInteraction();
+    } else {
+      setPlayerCurrentInteraction(null);
+      togglePauseState();
+    }
+
+    setClickedMenuItem(null);
+  };
+
+  const closePcInteraction = () => {
+    setPlayerCurrentInteraction('APC');
   };
 
   const handlePlayerCurrentInteraction = () => {
@@ -39,6 +51,22 @@ export const usePlayerCurrentInteraction = (
           console.log('PC is booting');
           setCurrentInteractionWithPauseState();
         }
+        if (gameState.isPaused) {
+          switch (selectedMenuItem) {
+            case 0:
+              setClickedMenuItem('POKéDEX');
+              break;
+            case 1:
+              setClickedMenuItem('POKéMON');
+              break;
+            case 2:
+              setClickedMenuItem('EXIT');
+              break;
+            default:
+              break;
+          }
+        }
+
         break;
 
       case 'APS':
@@ -65,5 +93,6 @@ export const usePlayerCurrentInteraction = (
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
     closeCurrentInteraction,
+    clickedMenuItem,
   };
 };

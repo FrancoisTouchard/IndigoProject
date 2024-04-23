@@ -18,6 +18,8 @@ const GameDisplayComponent = ({
   offsetY,
   offsetX,
   playerCurrentInteraction,
+  focusedMenuItem,
+  clickedMenuItem,
 }: GameDisplayComponentProps) => {
   return (
     <View style={styles.gameDisplayContainer}>
@@ -28,6 +30,8 @@ const GameDisplayComponent = ({
         offsetX={offsetX}
         playerCurrentInteraction={playerCurrentInteraction}
         gameState={gameState}
+        focusedMenuItem={focusedMenuItem}
+        clickedMenuItem={clickedMenuItem}
       />
     </View>
   );

@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import { GameControls } from './components/GameControls';
 import { useDirectionalCross } from './components/GameControls/DirectionalCross/useDirectionalCross';
 import { GameDisplay } from './components/GameDisplay';
+import { useMenu } from './components/GameDisplay/GameScreen/Menu/useMenu';
+import { PC_MENU_ITEMS } from './components/GameDisplay/GameScreen/PlayerCurrentInteraction/PcInteraction';
 import { getPlayerPosition } from './components/GameDisplay/GameScreen/PlayerPositionIndicator/playerPositionHelpers';
 import { useLobbyRoom } from './components/GameDisplay/GameScreen/RoomsBackgrounds/LobbyRoom/useLobbyRoom';
 import { usePlayerCurrentInteraction } from './components/GameDisplay/GameScreen/RoomsBackgrounds/usePlayerCurrentInteraction';
@@ -20,15 +22,18 @@ const OpeningScreenComponent = () => {
   } = useDirectionalCross();
   const { offsetY, offsetX } = useLobbyRoom(isPressed);
   const { currentTileAllocation } = getPlayerPosition(offsetY, offsetX);
+  const { focusedMenuItem } = useMenu(isPressedInteraction, PC_MENU_ITEMS);
   const {
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
     closeCurrentInteraction,
+    clickedMenuItem,
   } = usePlayerCurrentInteraction(
     currentTileAllocation,
     isPressedPreviousValue,
     togglePauseState,
     gameState,
+    focusedMenuItem,
   );
 
   return (
@@ -39,6 +44,8 @@ const OpeningScreenComponent = () => {
         offsetY={offsetY}
         offsetX={offsetX}
         playerCurrentInteraction={playerCurrentInteraction}
+        focusedMenuItem={focusedMenuItem}
+        clickedMenuItem={clickedMenuItem}
       />
       <GameControls
         panResponder={
