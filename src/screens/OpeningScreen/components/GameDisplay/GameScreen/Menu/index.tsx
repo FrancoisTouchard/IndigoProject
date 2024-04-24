@@ -4,22 +4,18 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { ContainerWithBorders } from '../../../../../../components/ContainerWithBorders';
 import { BORDER_SIZE } from '../../../../../../components/ContainerWithBorders/styles';
-import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { PC_MENU_WIDTH } from '../PlayerCurrentInteraction/PcInteraction';
 import { ListSelector } from './ListSelector';
-import { useMenu } from './useMenu';
 
-const PC_MENU_WIDTH = 150;
 export const MENU_ITEMS_LEFT_OFFSET = 22;
 export const LIST_ITEM_HEIGHT = 17;
 
 interface MenuProps {
-  isPressed: ArrowType | false;
   menuItems: string[];
+  focusedMenuItem: number;
 }
 
-const MenuComponent = ({ isPressed, menuItems }: MenuProps) => {
-  const { selectedItem } = useMenu(isPressed, menuItems);
-
+const MenuComponent = ({ menuItems, focusedMenuItem }: MenuProps) => {
   return (
     <View style={styles.menuContainer}>
       <View
@@ -38,7 +34,7 @@ const MenuComponent = ({ isPressed, menuItems }: MenuProps) => {
             {menuItems.map((item, index) => (
               <View key={index} style={styles.menuItemContainer}>
                 <Text style={styles.menuText}>{item}</Text>
-                {index === selectedItem && <ListSelector />}
+                {index === focusedMenuItem && <ListSelector />}
               </View>
             ))}
           </View>

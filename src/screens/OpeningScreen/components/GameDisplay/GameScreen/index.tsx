@@ -13,6 +13,8 @@ interface GameScreenProps {
   offsetX: number;
   playerCurrentInteraction: string | null;
   gameState: GameState;
+  focusedMenuItem: number;
+  clickedMenuItem: string | null;
 }
 
 const GameScreenComponent = ({
@@ -21,6 +23,8 @@ const GameScreenComponent = ({
   offsetX,
   playerCurrentInteraction,
   gameState,
+  focusedMenuItem,
+  clickedMenuItem,
 }: GameScreenProps) => {
   if (gameState.name !== 'GameScreen') return null;
 
@@ -31,6 +35,8 @@ const GameScreenComponent = ({
       <PlayerCurrentInteraction
         playerCurrentInteraction={playerCurrentInteraction}
         isPressed={isPressed}
+        focusedMenuItem={focusedMenuItem}
+        clickedMenuItem={clickedMenuItem}
       />
     </View>
   );

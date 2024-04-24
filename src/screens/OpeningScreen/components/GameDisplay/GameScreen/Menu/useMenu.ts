@@ -1,24 +1,41 @@
 import { useEffect, useState } from 'react';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { PC_MENU_ITEMS } from '../PlayerCurrentInteraction/PcInteraction';
 
-export const useMenu = (isPressed: ArrowType | false, menuItems: string[]) => {
-  const [selectedItem, setSelectedItem] = useState<number>(0);
+export const useMenu = (
+  isPressed: ArrowType | false,
+  currentTileAllocation: string,
+) => {
+  const [focusedMenuItem, setFocusedMenuItem] = useState<number>(0);
+
+  let menuItems: string[];
+  switch (currentTileAllocation) {
+    case 'APC':
+      menuItems = PC_MENU_ITEMS;
+      break;
+    default:
+      break;
+  }
 
   const navigateMenu = (selectorValue: 'up' | 'down') => {
     if (selectorValue === 'up')
-      setSelectedItem(prevIndex =>
+      setFocusedMenuItem(prevIndex =>
         prevIndex === 0 ? menuItems.length - 1 : prevIndex - 1,
       );
     else
-      setSelectedItem(prevIndex =>
+      setFocusedMenuItem(prevIndex =>
         prevIndex === menuItems.length - 1 ? 0 : prevIndex + 1,
       );
+  };
+
+  const resetFocusedMenuItemState = () => {
+    setFocusedMenuItem(0);
   };
 
   useEffect(() => {
     if (isPressed === 'up' || isPressed === 'down') navigateMenu(isPressed);
   }, [isPressed]);
 
-  return { selectedItem };
+  return { focusedMenuItem, resetFocusedMenuItemState };
 };
