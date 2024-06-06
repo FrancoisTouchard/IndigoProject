@@ -8,6 +8,7 @@ export const useMenu = (
   currentTileAllocation: string,
 ) => {
   const [focusedMenuItem, setFocusedMenuItem] = useState<number>(0);
+  const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
 
   let menuItems: string[];
   switch (currentTileAllocation) {
@@ -33,9 +34,33 @@ export const useMenu = (
     setFocusedMenuItem(0);
   };
 
+  const onMenuItemClick = () => {
+    // on doit savoir ici dans quel menu on est, menu ou pokédex
+    switch (focusedMenuItem) {
+      case 0:
+        setClickedMenuItem(PC_MENU_ITEMS[0]);
+        break;
+      case 1:
+        setClickedMenuItem(PC_MENU_ITEMS[1]);
+        break;
+      case 2:
+        // closeCurrentInteraction();
+        setClickedMenuItem(PC_MENU_ITEMS[2]);
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     if (isPressed === 'up' || isPressed === 'down') navigateMenu(isPressed);
   }, [isPressed]);
 
-  return { focusedMenuItem, resetFocusedMenuItemState };
+  return {
+    focusedMenuItem,
+    resetFocusedMenuItemState,
+    onMenuItemClick,
+    clickedMenuItem,
+    setClickedMenuItem,
+  };
 };

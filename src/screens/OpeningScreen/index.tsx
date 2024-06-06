@@ -21,22 +21,26 @@ const OpeningScreenComponent = () => {
   } = useDirectionalCross();
   const { offsetY, offsetX } = useLobbyRoom(isPressed);
   const { currentTileAllocation } = getPlayerPosition(offsetY, offsetX);
-  const { focusedMenuItem, resetFocusedMenuItemState } = useMenu(
-    isPressedInteraction,
-    currentTileAllocation,
-  );
+  const {
+    focusedMenuItem,
+    resetFocusedMenuItemState,
+    onMenuItemClick,
+    clickedMenuItem,
+    setClickedMenuItem,
+  } = useMenu(isPressedInteraction, currentTileAllocation);
   const {
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
     closeCurrentInteraction,
-    clickedMenuItem,
   } = usePlayerCurrentInteraction(
     currentTileAllocation,
     isPressedPreviousValue,
     togglePauseState,
     gameState,
-    focusedMenuItem,
     resetFocusedMenuItemState,
+    onMenuItemClick,
+    clickedMenuItem,
+    setClickedMenuItem,
   );
 
   return (

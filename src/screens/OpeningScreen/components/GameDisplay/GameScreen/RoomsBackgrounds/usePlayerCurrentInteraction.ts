@@ -2,26 +2,30 @@ import { useState } from 'react';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
 import { GameState } from '../../useGameStateManager';
-import { PC_MENU_ITEMS } from '../PlayerCurrentInteraction/PcInteraction';
 
 export const usePlayerCurrentInteraction = (
   currentTileAllocation: string,
   isPressedPreviousValue: React.MutableRefObject<false | ArrowType>,
   togglePauseState: () => void,
   gameState: GameState,
-  focusedMenuItem: number,
   resetFocusedMenuItemState: () => void,
+  onMenuItemClick: () => void,
+  clickedMenuItem: string | null,
+  setClickedMenuItem: (clickedMenuItem: string | null) => void,
 ) => {
   const [playerCurrentInteraction, setPlayerCurrentInteraction] = useState<
     string | null
   >(null);
-  const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
 
   const setCurrentInteractionWithPauseState = () => {
     if (!gameState.isPaused) {
       setPlayerCurrentInteraction(currentTileAllocation);
       togglePauseState();
     }
+  };
+
+  const closeMenuOption = () => {
+    setPlayerCurrentInteraction(currentTileAllocation);
   };
 
   const closeCurrentInteraction = () => {
@@ -36,26 +40,6 @@ export const usePlayerCurrentInteraction = (
     resetFocusedMenuItemState();
   };
 
-  const closeMenuOption = () => {
-    setPlayerCurrentInteraction(currentTileAllocation);
-  };
-
-  const onMenuItemClick = () => {
-    switch (focusedMenuItem) {
-      case 0:
-        setClickedMenuItem(PC_MENU_ITEMS[0]);
-        break;
-      case 1:
-        setClickedMenuItem(PC_MENU_ITEMS[1]);
-        break;
-      case 2:
-        closeCurrentInteraction();
-        break;
-      default:
-        break;
-    }
-  };
-
   const handlePlayerCurrentInteraction = () => {
     switch (currentTileAllocation) {
       case 'APKC':
@@ -63,8 +47,8 @@ export const usePlayerCurrentInteraction = (
           console.log('Welcome to the PokéCenter !');
           setCurrentInteractionWithPauseState();
         }
-        break;
 
+        break;
       case 'APC':
         if (!gameState.isPaused && isPressedPreviousValue.current === 'up') {
           console.log('PC is booting');
@@ -82,14 +66,13 @@ export const usePlayerCurrentInteraction = (
         }
 
         break;
-
       case 'EX':
         if (isPressedPreviousValue.current === 'up') {
           console.log('You have no Pokémon !');
           setCurrentInteractionWithPauseState();
         }
-        break;
 
+        break;
       default:
         break;
     }
@@ -99,6 +82,5 @@ export const usePlayerCurrentInteraction = (
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
     closeCurrentInteraction,
-    clickedMenuItem,
   };
 };
