@@ -2,14 +2,14 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
 import { GAME_DISPLAY_HEIGHT, TILE_SIZE, WINDOW_WIDTH } from '../..';
+import { IsPressedType } from '../../types';
 import { GameState } from '../../useGameStateManager';
 import { TILE_SIZE_HALVED } from '../RoomsBackgrounds/LobbyRoom/LobbyRoomMap';
 import { usePlayerOrientation } from './usePlayerOrientation';
 
 interface PlayerProps {
-  isPressed: ArrowType | false;
+  isPressed: IsPressedType;
   gameState: GameState;
 }
 
