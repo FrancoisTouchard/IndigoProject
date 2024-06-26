@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import { PanResponderInstance, StyleSheet, View } from 'react-native';
 
 import { turquoise } from '../../../../../assets/AnimationOpening/stylesColorsCode';
+import { IsPressedType } from '../GameDisplay/types';
 import { DirectionalCross } from './DirectionalCross';
-import { ArrowType } from './DirectionalCross/DirectionalArrow/types';
 import { PrimaryButton } from './PrimaryButton/index';
 import { SecondaryButton } from './SecondaryButton/index';
 
@@ -16,7 +16,7 @@ const GameControlsComponent = ({
 }: {
   redirectToGameScreen: () => void;
   panResponder: PanResponderInstance;
-  isPressed: false | ArrowType;
+  isPressed: IsPressedType;
   handlePlayerCurrentInteraction: () => void;
   closeCurrentInteraction: () => void;
 }) => {
