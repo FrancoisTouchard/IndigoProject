@@ -1,10 +1,20 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { ListSelector } from '../../../PCMenu/ListSelector';
 import { PokedexBorder } from './PokedexBorder';
 import { PokedexSingleRow } from './PokedexSingleRow';
 
-const pokemonData = [
+interface PokedexProps {
+  setActiveMenu: (activeMenu: string) => void;
+  focusedPokedexItem: number;
+}
+export interface PokemonDataProps {
+  number: string;
+  name: string;
+}
+
+export const pokemonData: PokemonDataProps[] = [
   {
     number: '001',
     name: 'BULBASAUR',
@@ -27,17 +37,23 @@ const pokemonData = [
   },
 ];
 
-const PokedexComponent = () => {
+const PokedexComponent = ({
+  setActiveMenu,
+  focusedPokedexItem,
+}: PokedexProps) => {
+  useEffect(() => {
+    setActiveMenu('Pokedex');
+  }, []);
+
   return (
     <>
       <PokedexBorder text={'- POKéMON   LIST - '} />
       <View style={styles.listContainer}>
-        {pokemonData.map(pokemon => (
-          <PokedexSingleRow
-            key={pokemon.number}
-            number={pokemon.number}
-            name={pokemon.name}
-          />
+        {pokemonData.map((pokemon, index) => (
+          <View key={index} style={styles.rowContainer}>
+            <PokedexSingleRow number={pokemon.number} name={pokemon.name} />
+            {index === focusedPokedexItem && <ListSelector leftOffset={0} />}
+          </View>
         ))}
       </View>
       <PokedexBorder text={'tips de NAVIGATION'} />
@@ -50,6 +66,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#F9F6EE',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
