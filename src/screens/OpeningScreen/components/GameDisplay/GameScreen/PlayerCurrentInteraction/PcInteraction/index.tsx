@@ -1,28 +1,14 @@
 import React, { memo } from 'react';
 import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/DirectionalCross/DirectionalArrow/types';
 
-import { Menu } from '../../Menu';
-import { Pokedex } from './Pokedex';
-
-export const PC_MENU_WIDTH = 150;
-export const PC_MENU_ITEMS = ['POKéDEX', 'POKéMON', 'EXIT'];
+import { PCMenu } from '../../PCMenu';
 
 interface PcInteractionProps {
   isPressed: ArrowType | false;
-  focusedMenuItem: number;
-  clickedMenuItem: string | null;
 }
 
-const PcInteractionComponent = ({
-  isPressed,
-  focusedMenuItem,
-  clickedMenuItem,
-}: PcInteractionProps) => {
-  if (clickedMenuItem === PC_MENU_ITEMS[0]) {
-    return <Pokedex />;
-  }
-
-  return <Menu menuItems={PC_MENU_ITEMS} focusedMenuItem={focusedMenuItem} />;
+const PcInteractionComponent = ({ isPressed }: PcInteractionProps) => {
+  return <PCMenu isPressed={isPressed} />;
 };
 
 export const PcInteraction = memo(PcInteractionComponent);
