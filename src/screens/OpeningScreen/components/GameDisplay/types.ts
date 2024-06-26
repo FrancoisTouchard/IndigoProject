@@ -1,12 +1,6 @@
-import { ArrowType } from '../GameControls/DirectionalCross/DirectionalArrow/types';
-import { GameState } from './useGameStateManager';
+import {
+  ABButtonType,
+  ArrowType,
+} from '../GameControls/DirectionalCross/DirectionalArrow/types';
 
-export interface GameDisplayComponentProps {
-  gameState: GameState;
-  isPressed: ArrowType | false;
-  offsetY: number;
-  offsetX: number;
-  playerCurrentInteraction: string | null;
-  focusedMenuItem: number;
-  clickedMenuItem: string | null;
-}
+export type IsPressedType = ArrowType | ABButtonType | false;
