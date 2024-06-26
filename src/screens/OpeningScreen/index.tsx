@@ -4,7 +4,6 @@ import { StyleSheet, View } from 'react-native';
 import { GameControls } from './components/GameControls';
 import { useDirectionalCross } from './components/GameControls/DirectionalCross/useDirectionalCross';
 import { GameDisplay } from './components/GameDisplay';
-import { useMenu } from './components/GameDisplay/GameScreen/Menu/useMenu';
 import { getPlayerPosition } from './components/GameDisplay/GameScreen/PlayerPositionIndicator/playerPositionHelpers';
 import { useLobbyRoom } from './components/GameDisplay/GameScreen/RoomsBackgrounds/LobbyRoom/useLobbyRoom';
 import { usePlayerCurrentInteraction } from './components/GameDisplay/GameScreen/RoomsBackgrounds/usePlayerCurrentInteraction';
@@ -13,55 +12,46 @@ import { useGameStateManager } from './components/GameDisplay/useGameStateManage
 const OpeningScreenComponent = () => {
   const { gameState, redirectToGameScreen, togglePauseState } =
     useGameStateManager();
-  const { isPressed, panResponder, isPressedPreviousValue } =
-    useDirectionalCross();
   const {
-    isPressed: isPressedInteraction,
-    panResponder: panResponderInteraction,
-  } = useDirectionalCross();
-  const { offsetY, offsetX } = useLobbyRoom(isPressed);
+    isPressed,
+    panResponder,
+    playerOrientation,
+    setAButtonIsPressed,
+    setBButtonIsPressed,
+  } = useDirectionalCross(gameState.isPaused);
+  const { offsetY, offsetX } = useLobbyRoom(isPressed, gameState);
   const { currentTileAllocation } = getPlayerPosition(offsetY, offsetX);
-  const {
-    focusedMenuItem,
-    resetFocusedMenuItemState,
-    onMenuItemClick,
-    clickedMenuItem,
-    setClickedMenuItem,
-  } = useMenu(isPressedInteraction, currentTileAllocation);
+
   const {
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
+    pressButtonAndCloseInteraction,
     closeCurrentInteraction,
   } = usePlayerCurrentInteraction(
     currentTileAllocation,
-    isPressedPreviousValue,
+    playerOrientation,
     togglePauseState,
     gameState,
-    resetFocusedMenuItemState,
-    onMenuItemClick,
-    clickedMenuItem,
-    setClickedMenuItem,
+    setAButtonIsPressed,
+    setBButtonIsPressed,
   );
 
   return (
     <View style={styles.gameAndControlsContainer}>
       <GameDisplay
         gameState={gameState}
-        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
+        isPressed={isPressed}
         offsetY={offsetY}
         offsetX={offsetX}
         playerCurrentInteraction={playerCurrentInteraction}
-        focusedMenuItem={focusedMenuItem}
-        clickedMenuItem={clickedMenuItem}
+        closeCurrentInteraction={closeCurrentInteraction}
       />
       <GameControls
-        panResponder={
-          !playerCurrentInteraction ? panResponder : panResponderInteraction
-        }
-        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
+        panResponder={panResponder}
+        isPressed={isPressed}
         redirectToGameScreen={redirectToGameScreen}
         handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
-        closeCurrentInteraction={closeCurrentInteraction}
+        closeCurrentInteraction={pressButtonAndCloseInteraction}
       />
     </View>
   );
