@@ -1,17 +1,15 @@
 import { useState } from 'react';
 
-import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { IsPressedType } from '../../types';
 import { GameState } from '../../useGameStateManager';
 
 export const usePlayerCurrentInteraction = (
   currentTileAllocation: string,
-  isPressedPreviousValue: React.MutableRefObject<false | ArrowType>,
+  previousPlayerOrientation: React.MutableRefObject<IsPressedType>,
   togglePauseState: () => void,
   gameState: GameState,
-  resetFocusedMenuItemState: () => void,
-  onMenuItemClick: () => void,
-  clickedMenuItem: string | null,
-  setClickedMenuItem: (clickedMenuItem: string | null) => void,
+  setAButtonIsPressed: () => void,
+  setBButtonIsPressed: () => void,
 ) => {
   const [playerCurrentInteraction, setPlayerCurrentInteraction] = useState<
     string | null
@@ -24,51 +22,42 @@ export const usePlayerCurrentInteraction = (
     }
   };
 
-  const closeMenuOption = () => {
-    setPlayerCurrentInteraction(currentTileAllocation);
+  const pressButtonAndCloseInteraction = () => {
+    setBButtonIsPressed();
+    closeCurrentInteraction();
   };
 
   const closeCurrentInteraction = () => {
-    if (clickedMenuItem) {
-      closeMenuOption();
-    } else {
+    setBButtonIsPressed();
+
+    if (playerCurrentInteraction === 'APC') {
       setPlayerCurrentInteraction(null);
       togglePauseState();
     }
-
-    setClickedMenuItem(null);
-    resetFocusedMenuItemState();
   };
 
   const handlePlayerCurrentInteraction = () => {
     switch (currentTileAllocation) {
       case 'APKC':
-        if (isPressedPreviousValue.current === 'up') {
-          console.log('Welcome to the PokéCenter !');
+        if (previousPlayerOrientation.current === 'up') {
           setCurrentInteractionWithPauseState();
         }
 
         break;
       case 'APC':
-        if (!gameState.isPaused && isPressedPreviousValue.current === 'up') {
-          console.log('PC is booting');
+        if (!gameState.isPaused && previousPlayerOrientation.current === 'up') {
           setCurrentInteractionWithPauseState();
-        }
-        if (gameState.isPaused) {
-          onMenuItemClick();
         }
 
         break;
       case 'APS':
-        if (isPressedPreviousValue.current === 'left') {
-          console.log('Welcome to the shop !');
+        if (previousPlayerOrientation.current === 'left') {
           setCurrentInteractionWithPauseState();
         }
 
         break;
       case 'EX':
-        if (isPressedPreviousValue.current === 'up') {
-          console.log('You have no Pokémon !');
+        if (previousPlayerOrientation.current === 'up') {
           setCurrentInteractionWithPauseState();
         }
 
@@ -76,11 +65,13 @@ export const usePlayerCurrentInteraction = (
       default:
         break;
     }
+    setAButtonIsPressed();
   };
 
   return {
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
+    pressButtonAndCloseInteraction,
     closeCurrentInteraction,
   };
 };
