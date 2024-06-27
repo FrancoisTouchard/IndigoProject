@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
-import { PcInteraction } from './PcInteraction';
+import { PCMenu } from '../PCMenu';
 
 interface PlayerCurrentInteractionProps {
   playerCurrentInteraction: string | null;
@@ -14,7 +14,7 @@ const PlayerCurrentInteractionComponent = ({
 }: PlayerCurrentInteractionProps) => {
   if (playerCurrentInteraction !== 'APC') return null;
 
-  return <PcInteraction isPressed={isPressed} />;
+  return <PCMenu isPressed={isPressed} />;
 };
 
 export const PlayerCurrentInteraction = memo(PlayerCurrentInteractionComponent);

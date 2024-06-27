@@ -1,24 +1,25 @@
 import { black } from 'assets/AnimationOpening/stylesColorsCode';
 import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { GenericMenu } from 'src/components/GenericMenu';
 
 import { ContainerWithBorders } from '../../../../../../components/ContainerWithBorders';
 import { BORDER_SIZE } from '../../../../../../components/ContainerWithBorders/styles';
-import { ArrowType } from '../../../GameControls/DirectionalCross/DirectionalArrow/types';
-import { ListSelector } from './ListSelector';
-import { useMenu } from './useMenu';
+import { IsPressedType } from '../../types';
+import { usePCMenu } from './usePCMenu';
 
-const PC_MENU_WIDTH = 150;
 export const MENU_ITEMS_LEFT_OFFSET = 22;
 export const LIST_ITEM_HEIGHT = 17;
 
+export const PC_MENU_ITEMS = ['POKéDEX', 'POKéMON', 'EXIT'];
+const PC_MENU_WIDTH = 150;
+
 interface MenuProps {
-  isPressed: ArrowType | false;
-  menuItems: string[];
+  isPressed: IsPressedType;
 }
 
-const MenuComponent = ({ isPressed, menuItems }: MenuProps) => {
-  const { selectedItem } = useMenu(isPressed, menuItems);
+const PCMenuComponent = ({ isPressed }: MenuProps) => {
+  const { onMenuItemPress } = usePCMenu();
 
   return (
     <View style={styles.menuContainer}>
@@ -31,16 +32,15 @@ const MenuComponent = ({ isPressed, menuItems }: MenuProps) => {
            * la hauteur du nombre d'éléments dans la liste
            * la hauteur de la border du bas
            */
-          height: menuItems.length * LIST_ITEM_HEIGHT + BORDER_SIZE * 2,
+          height: PC_MENU_ITEMS.length * LIST_ITEM_HEIGHT + BORDER_SIZE * 2,
         }}>
         <ContainerWithBorders>
           <View style={[styles.menuItemsContainer]}>
-            {menuItems.map((item, index) => (
-              <View key={index} style={styles.menuItemContainer}>
-                <Text style={styles.menuText}>{item}</Text>
-                {index === selectedItem && <ListSelector />}
-              </View>
-            ))}
+            <GenericMenu
+              isPressed={isPressed}
+              menuItems={PC_MENU_ITEMS}
+              onMenuItemPress={onMenuItemPress}
+            />
           </View>
         </ContainerWithBorders>
       </View>
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Menu = memo(MenuComponent);
+export const PCMenu = memo(PCMenuComponent);
