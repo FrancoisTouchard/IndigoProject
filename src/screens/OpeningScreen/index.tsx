@@ -12,42 +12,48 @@ import { useGameStateManager } from './components/GameDisplay/useGameStateManage
 const OpeningScreenComponent = () => {
   const { gameState, redirectToGameScreen, togglePauseState } =
     useGameStateManager();
-  const { isPressed, panResponder, isPressedPreviousValue } =
-    useDirectionalCross();
   const {
-    isPressed: isPressedInteraction,
-    panResponder: panResponderInteraction,
-  } = useDirectionalCross();
-  const { offsetY, offsetX } = useLobbyRoom(isPressed);
+    isPressed,
+    panResponder,
+    playerOrientation,
+    setAButtonIsPressed,
+    setBButtonIsPressed,
+    resetIsPressedState,
+  } = useDirectionalCross(gameState.isPaused);
+  const { offsetY, offsetX } = useLobbyRoom(isPressed, gameState);
   const { currentTileAllocation } = getPlayerPosition(offsetY, offsetX);
+
   const {
     playerCurrentInteraction,
     handlePlayerCurrentInteraction,
+    pressButtonAndCloseInteraction,
     closeCurrentInteraction,
   } = usePlayerCurrentInteraction(
     currentTileAllocation,
-    isPressedPreviousValue,
+    playerOrientation,
     togglePauseState,
     gameState,
+    setAButtonIsPressed,
+    setBButtonIsPressed,
+    resetIsPressedState,
   );
 
   return (
     <View style={styles.gameAndControlsContainer}>
       <GameDisplay
         gameState={gameState}
-        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
+        isPressed={isPressed}
         offsetY={offsetY}
         offsetX={offsetX}
         playerCurrentInteraction={playerCurrentInteraction}
+        closeCurrentInteraction={closeCurrentInteraction}
       />
       <GameControls
-        panResponder={
-          !playerCurrentInteraction ? panResponder : panResponderInteraction
-        }
-        isPressed={!playerCurrentInteraction ? isPressed : isPressedInteraction}
+        panResponder={panResponder}
+        isPressed={isPressed}
         redirectToGameScreen={redirectToGameScreen}
         handlePlayerCurrentInteraction={handlePlayerCurrentInteraction}
-        closeCurrentInteraction={closeCurrentInteraction}
+        closeCurrentInteraction={pressButtonAndCloseInteraction}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import { ArrowType } from '../../../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { IsPressedType } from '../../../types';
 import { ImagesPaths } from '../types';
 
 export const IMAGES_PATHS: ImagesPaths = {
@@ -25,7 +25,7 @@ export const IMAGES_PATHS: ImagesPaths = {
   },
 };
 
-export const getPathConfigFromDirection = (direction: ArrowType | false) => {
+export const getPathConfigFromDirection = (direction: IsPressedType) => {
   switch (direction) {
     case 'down':
       return IMAGES_PATHS.down;
