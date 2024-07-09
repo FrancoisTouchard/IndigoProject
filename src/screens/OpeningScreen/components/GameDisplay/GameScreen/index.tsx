@@ -1,18 +1,19 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { ArrowType } from '../../GameControls/DirectionalCross/DirectionalArrow/types';
+import { IsPressedType } from '../types';
 import { GameState } from '../useGameStateManager';
+import { PCMenu } from './PCMenu';
 import { Player } from './Player';
-import { PlayerCurrentInteraction } from './PlayerCurrentInteraction';
 import { LobbyRoom } from './RoomsBackgrounds/LobbyRoom';
 
 interface GameScreenProps {
-  isPressed: ArrowType | false;
+  isPressed: IsPressedType;
   offsetY: number;
   offsetX: number;
   playerCurrentInteraction: string | null;
   gameState: GameState;
+  closeCurrentInteraction: () => void;
 }
 
 const GameScreenComponent = ({
@@ -21,6 +22,7 @@ const GameScreenComponent = ({
   offsetX,
   playerCurrentInteraction,
   gameState,
+  closeCurrentInteraction,
 }: GameScreenProps) => {
   if (gameState.name !== 'GameScreen') return null;
 
@@ -28,10 +30,12 @@ const GameScreenComponent = ({
     <View style={styles.container}>
       <LobbyRoom offsetY={offsetY} offsetX={offsetX} />
       <Player isPressed={isPressed} gameState={gameState} />
-      <PlayerCurrentInteraction
-        playerCurrentInteraction={playerCurrentInteraction}
-        isPressed={isPressed}
-      />
+      {playerCurrentInteraction === 'APC' && (
+        <PCMenu
+          isPressed={isPressed}
+          closeCurrentInteraction={closeCurrentInteraction}
+        />
+      )}
     </View>
   );
 };
