@@ -2,6 +2,7 @@ import { pokédexBackgroundColor } from 'assets/appStyle';
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GenericList } from 'src/components/GenericList';
+import { ListItemText } from 'src/components/GenericList/ListItemText';
 
 import { IsPressedType } from '../../../types';
 import { PokedexBorder } from './PokedexBorder';
@@ -22,12 +23,18 @@ export const pokemonData = [
 
 const TOP_BORDER_TEXT = '- POKéMON   LIST - ';
 const BOTTOM_BORDER_TEXT = 'tips de NAVIGATION';
-const POKEDEX_ITEMS_LEFT_OFFSET = 0;
-const POKEDEX_ITEM_HEIGHT = 17;
-const POKEDEX_ITEM_LEFT_OFFSET = 22;
+
+const renderListItem = (item: string) => {
+  return (
+    <>
+      <ListItemText item={item} />
+    </>
+  );
+};
 
 const PokedexComponent = ({ isPressed }: PokedexProps) => {
   const { onPokedexItemPress } = usePokedex();
+
   return (
     <>
       <PokedexBorder text={TOP_BORDER_TEXT} />
@@ -36,9 +43,7 @@ const PokedexComponent = ({ isPressed }: PokedexProps) => {
           isPressed={isPressed}
           listItems={pokemonData}
           onMenuItemPress={onPokedexItemPress}
-          listSelectorOffset={POKEDEX_ITEMS_LEFT_OFFSET}
-          listItemHeight={POKEDEX_ITEM_HEIGHT}
-          listItemLeftOffset={POKEDEX_ITEM_LEFT_OFFSET}
+          renderListItem={renderListItem}
         />
       </View>
       <PokedexBorder text={BOTTOM_BORDER_TEXT} />

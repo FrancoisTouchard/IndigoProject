@@ -2,18 +2,18 @@ import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-interface ListSelectorProps {
-  leftOffset: number;
-}
-
 const LIST_SELECTOR_DIMENSIONS = 10;
+const LIST_OFFSET = 6;
+export const LIST_SELECTOR_DIMENSIONS_WITH_OFFSET =
+  LIST_SELECTOR_DIMENSIONS + LIST_OFFSET * 2;
 
-const ListSelectorComponent = ({ leftOffset }: ListSelectorProps) => {
-  const listSelectorLeftOffset = -leftOffset + LIST_SELECTOR_DIMENSIONS / 2;
+const ListSelectorComponent = () => {
+  const listSelectorStyle = { left: -(LIST_SELECTOR_DIMENSIONS + LIST_OFFSET) };
+
   return (
     <FastImage
-      style={[styles.listSelector, { left: listSelectorLeftOffset }]}
-      source={require('../../../assets/ResizableMenu/ListSelector.png')}
+      style={[styles.listSelector, listSelectorStyle]}
+      source={require('../../../../assets/ResizableMenu/ListSelector.png')}
       resizeMode={FastImage.resizeMode.contain}
     />
   );
