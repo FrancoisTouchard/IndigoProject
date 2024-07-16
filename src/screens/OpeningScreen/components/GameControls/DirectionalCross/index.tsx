@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { PanResponderInstance, StyleSheet, View } from 'react-native';
 
+import { IsPressedType } from '../../GameDisplay/types';
 import { DirectionalArrow } from './DirectionalArrow';
-import { ArrowType } from './DirectionalArrow/types';
 interface DirectionalCrossComponentProps {
   panResponder: PanResponderInstance;
-  isPressed: false | ArrowType;
+  isPressed: IsPressedType;
 }
 
 export const ARROW_CONTAINER_DIMENSIONS = 150;

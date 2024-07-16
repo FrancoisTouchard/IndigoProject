@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowType } from 'src/screens/OpeningScreen/components/GameControls/DirectionalCross/DirectionalArrow/types';
 
+import { IsPressedType } from '../../../types';
+import { GameState } from '../../../useGameStateManager';
 import {
   goToInitialOffsetX,
   goToInitialOffsetY,
@@ -10,7 +11,10 @@ import { ENTRANCE_POSITION_X, STEP_PACE_IN_PIXELS } from './LobbyRoomMap';
 
 const INTERVAL_DURATION = 1;
 
-export const useLobbyRoom = (isPressed: ArrowType | false) => {
+export const useLobbyRoom = (
+  isPressed: IsPressedType,
+  gameState: GameState,
+) => {
   const [offsetY, setOffsetY] = useState<number>(goToInitialOffsetY());
   const [offsetX, setOffsetX] = useState<number>(
     goToInitialOffsetX(ENTRANCE_POSITION_X),
@@ -19,6 +23,8 @@ export const useLobbyRoom = (isPressed: ArrowType | false) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const movePlayer = () => {
+    if (gameState.isPaused) return;
+
     let currentOffsetCounterY: number = offsetY;
     let currentOffsetCounterX: number = offsetX;
     switch (isPressed) {
